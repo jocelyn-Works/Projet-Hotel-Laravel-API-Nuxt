@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->foreignIdFor(\App\Models\User::class);
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->nullable();
