@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guests', function (Blueprint $table) {
+        Schema::create('booking_service', function (Blueprint $table) {
             $table->uuid();
-            $table->foreignUuid(\App\Models\User::class);
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->timestamps();
+            $table->foreignUuid(\App\Models\Booking::class);
+            $table->foreignUuid(\App\Models\Service::class);
+            $table->integer('quantity');
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('guests');
+        Schema::dropIfExists('booking_service');
     }
 };
