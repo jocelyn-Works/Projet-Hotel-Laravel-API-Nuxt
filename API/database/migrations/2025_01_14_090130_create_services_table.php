@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guests', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->uuid();
-            $table->foreignUuid(\App\Models\User::class);
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->timestamps();
+            $table->string('name');
+            $table->integer('price');
+            $table->string('description');
+            $table->boolean('is_per_person')->default(true);
+
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('guests');
+        Schema::dropIfExists('services');
     }
 };
