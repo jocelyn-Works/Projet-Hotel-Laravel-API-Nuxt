@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guests', function (Blueprint $table) {
+        Schema::create('discounts', function (Blueprint $table) {
             $table->uuid();
-            $table->foreignUuid(\App\Models\User::class);
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->timestamps();
+            $table->foreignUuid(\App\Models\Type::class);
+            $table->decimal('percent', 8, 2)->default(0);
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('end_at')->nullable();
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('guests');
+        Schema::dropIfExists('discounts');
     }
 };
