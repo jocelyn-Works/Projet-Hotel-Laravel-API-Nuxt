@@ -1,4 +1,4 @@
 <template>
-  <h1>Index page</h1>
+  <h1>Page Accueil</h1>
 </template>
 
