@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Header extends Model
 {
-    protected $table = 'Headers';
+    protected $table = 'headers';
     protected $primaryKey = 'id';
     public $timestamps = true;
 
