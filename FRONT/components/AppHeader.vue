@@ -1,4 +1,8 @@
 <template>
+<!--  <nav>-->
+<!--    <NuxtLink to="/">Accueil</NuxtLink>-->
+<!--    <NuxtLink to="/booking">Booking</NuxtLink>-->
+<!--  </nav>-->
   <header class="app-header">
     <!-- Image de fond -->
     <div class="background-image"></div>
