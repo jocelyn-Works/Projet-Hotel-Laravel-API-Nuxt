@@ -13,7 +13,7 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/{id}',  'userShowid');
 
     // Modifier un utilisateur par son id
-    Route::put('/update/{id}', 'updateUser')->middleware('auth:sanctum');
+    Route::put('/update/{id}', 'updateUser');
 
     // crée un users
     Route::post('/post',  'postUser');

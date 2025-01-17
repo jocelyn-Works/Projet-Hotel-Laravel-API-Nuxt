@@ -25,8 +25,19 @@ class HomeController extends Controller
             'city' => 'required|string',
             'phone_number' => 'required|string',
             'email' => 'required|string|email|unique:hotels,email',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
 
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = $image->storeAs('hotel', $imageName, 'public');
+
+            $validatedData['image'] = $path;
+        }
 
         $hotel = new Hotel($validatedData);
 
@@ -46,6 +57,7 @@ class HomeController extends Controller
             'city' => 'nullable|string',
             'phone_number' => 'nullable|string',
             'email' => 'nullable|string|email|unique:hotels,email',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
          $hotel = Hotel::findOrFail($id);
          $hotel->update($updateHotel);
@@ -106,8 +118,8 @@ class HomeController extends Controller
         $header = Header::findOrFail($id);
 
         if ($request->hasFile('image')) {
-            if ($header->image && Storage::disk('public')->exists($header->image)) {
-                Storage::disk('public')->delete($header->image);  // Supprimer l'ancienne image du stockage public
+            if ($header->image && Storage::disk('public')->exists('headers/' . $header->image)) {
+                Storage::disk('public')->delete('headers/' .$header->image);
             }
 
             $image = $request->file('image');
@@ -123,7 +135,7 @@ class HomeController extends Controller
 
         return response()->json([
             'message' => 'Header updated successfully!',
-            'header' => $header,  // Retourner l'enregistrement mis à jour avec les nouvelles données
+            'header' => $header,
         ], 201);
 
     }
