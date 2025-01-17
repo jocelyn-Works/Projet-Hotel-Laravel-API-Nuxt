@@ -13,7 +13,7 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/{id}',  'userShowid');
 
     // Modifier un utilisateur par son id
-    Route::put('/update/{id}', 'updateUser');
+    Route::post('/update/{id}', 'updateUser');
 
     // crée un users
     Route::post('/post',  'postUser');
@@ -39,7 +39,7 @@ Route::prefix('home')->controller(\App\Http\Controllers\HomeController::class)->
     Route::post('/postHotel',  'newHotel');
 
     // modifier hotel
-    Route::put('/updateHotel/{id}', 'updateHotel');
+    Route::post('/updateHotel/{id}', 'updateHotel');
 
     // suprimer info hotel
     Route::delete('/deleteHotel/{id}', 'deleteHotel');
@@ -53,7 +53,7 @@ Route::prefix('home')->controller(\App\Http\Controllers\HomeController::class)->
     Route::post('/postHeader',  'newHeader');
 
     // modifier le header
-    Route::put('/updateHeader/{id}', 'updateHeader');
+    Route::post('/updateHeader/{id}', 'updateHeader');
 
     // suprimer header
     Route::delete('/deleteHeader/{id}', 'deleteHeader');
@@ -67,7 +67,7 @@ Route::prefix('home')->controller(\App\Http\Controllers\HomeController::class)->
     Route::post('/postMain',  'newMain');
 
     // modifier le main
-    Route::put('/updateMain/{id}', 'updateMain');
+    Route::post('/updateMain/{id}', 'updateMain');
 
     // suprimer main
     Route::delete('/deleteMain/{id}', 'deleteMain');
@@ -80,8 +80,8 @@ Route::prefix('home')->controller(\App\Http\Controllers\HomeController::class)->
     Route::post('/postSocial',  'newSocial');
 
     // modifier le main
-    Route::put('/updateMain/{id}', 'updateMain');
+    Route::post('/updateSocial/{id}', 'updateSocial');
 
     // suprimer main
-    Route::delete('/deleteMain/{id}', 'deleteMain');
+    Route::delete('/deleteSocial/{id}', 'deleteSocial');
 });//*******************************************************************************************************************
