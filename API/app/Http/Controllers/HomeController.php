@@ -14,6 +14,12 @@ class HomeController extends Controller
     public function showHotel(): \Illuminate\Http\JsonResponse
     {
         $hotels = Hotel::all();
+        foreach ($hotels as $hotel) {
+            // Vérifier si une image existe pour cet enregistrement
+            if ($hotel->image) {
+                $hotel->image_url = Storage::url($hotel->image);
+            }
+        }
         return response()->json($hotels);
     }
 
@@ -77,8 +83,16 @@ class HomeController extends Controller
     //  -----------------------  Header   ----------------------- //
     public function showHeader(): \Illuminate\Http\JsonResponse
     {
-        $header = Header::all();
-        return response()->json($header);
+        $headers = Header::all();
+
+        foreach ($headers as $header) {
+            // Vérifier si une image existe pour cet enregistrement
+            if ($header->image) {
+                $header->image_url = Storage::url($header->image);
+            }
+        }
+
+        return response()->json($headers);
     }
 
     public function newHeader(Request $request): \Illuminate\Http\JsonResponse
