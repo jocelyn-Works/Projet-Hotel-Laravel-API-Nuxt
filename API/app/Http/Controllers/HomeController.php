@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Header;
+use App\Models\Main;
+use App\Models\Social;
 use Illuminate\Routing\Controller;
 
 use App\Models\Hotel;
@@ -15,7 +17,7 @@ class HomeController extends Controller
     {
         $hotels = Hotel::all();
         foreach ($hotels as $hotel) {
-            // Vérifier si une image existe pour cet enregistrement
+
             if ($hotel->image) {
                 $hotel->image_url = Storage::url($hotel->image);
             }
@@ -86,7 +88,7 @@ class HomeController extends Controller
         $headers = Header::all();
 
         foreach ($headers as $header) {
-            // Vérifier si une image existe pour cet enregistrement
+
             if ($header->image) {
                 $header->image_url = Storage::url($header->image);
             }
@@ -159,5 +161,123 @@ class HomeController extends Controller
         $deleteHeader = Header::findOrFail($id);
         $deleteHeader->delete();
         return response()->json(Hotel::all());
+    }
+
+
+
+
+    //  -----------------------  Main  ----------------------- //
+    public function showMain(): \Illuminate\Http\JsonResponse
+    {
+        $mains = Main::all();
+
+        foreach ($mains as $main) {
+
+            if ($main->image) {
+                $main->image_url = Storage::url($main->image);
+            }
+        }
+
+        return response()->json($mains);
+    }
+
+    public function newMain(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'content' =>'required|string'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = $image->storeAs('mains', $imageName, 'public');
+
+            $validatedData['image'] = $path;
+        }
+
+        $main = new Main($validatedData);
+
+        $main->save();
+
+        return response()->json([
+            'message' => 'Maincreated successfully!',
+            'main' => $main
+        ], 201);
+    }
+
+    public function updateMain($id, Request $request): \Illuminate\Http\JsonResponse
+    {
+        $validatedData = $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'content' =>'required|string'
+        ]);
+        $main = Main::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            if ($main->image && Storage::disk('public')->exists('headers/' . $main->image)) {
+                Storage::disk('public')->delete('mainss/' .$main->image);
+            }
+
+            $image = $request->file('image');
+
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = $image->storeAs('mains', $imageName, 'public');
+
+            $validatedData['image'] = $path;
+        }
+
+        $main->update($validatedData);
+
+        return response()->json([
+            'message' => 'Main updated successfully!',
+            'Main' => $main,
+        ], 201);
+
+    }
+
+    public function deleteMain($id): \Illuminate\Http\JsonResponse
+    {
+        $deleteHeader = Main::findOrFail($id);
+        $deleteHeader->delete();
+        return response()->json(Main::all());
+    }
+
+    // -----------------------    Social   ---------------------------------- //
+
+    public function showSocial(): \Illuminate\Http\JsonResponse
+    {
+        $socials = Social::all();
+        foreach ($socials as $social) {
+
+            if ($social->icon) {
+                $social->image_url = Storage::url($social->icon);
+            }
+        }
+        return response()->json($socials);
+    }
+
+    public function newSocial(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $validatedData = $request->validate([
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'url' =>'required|string'
+        ]);
+        if ($request->hasFile('icon')) {
+            $image = $request->file('icon');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('socials', $imageName, 'public');
+            $validatedData['icon'] = $path;
+        }
+        $social = new Social($validatedData);
+        $social->save();
+
+        return response()->json([
+            'message' => 'Social created successfully!',
+            'main' => $social
+        ], 201);
     }
 }

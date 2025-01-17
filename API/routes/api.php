@@ -57,4 +57,31 @@ Route::prefix('home')->controller(\App\Http\Controllers\HomeController::class)->
 
     // suprimer header
     Route::delete('/deleteHeader/{id}', 'deleteHeader');
+
+
+    // main
+    // afficher les infos de main
+    Route::get('/main', 'showMain');
+
+    // crée un main
+    Route::post('/postMain',  'newMain');
+
+    // modifier le main
+    Route::put('/updateMain/{id}', 'updateMain');
+
+    // suprimer main
+    Route::delete('/deleteMain/{id}', 'deleteMain');
+
+    // Social
+    // afficher les infos de Social
+    Route::get('/social', 'showSocial');
+
+    // crée
+    Route::post('/postSocial',  'newSocial');
+
+    // modifier le main
+    Route::put('/updateMain/{id}', 'updateMain');
+
+    // suprimer main
+    Route::delete('/deleteMain/{id}', 'deleteMain');
 });//*******************************************************************************************************************
