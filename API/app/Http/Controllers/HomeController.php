@@ -19,7 +19,7 @@ class HomeController extends Controller
         foreach ($hotels as $hotel) {
 
             if ($hotel->image) {
-                $hotel->image_url = Storage::url($hotel->image);
+                $hotel->image_url = url('storage/' . $hotel->image);
             }
         }
         return response()->json($hotels);
@@ -34,7 +34,6 @@ class HomeController extends Controller
             'phone_number' => 'required|string',
             'email' => 'required|string|email|unique:hotels,email',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-
         ]);
 
         if ($request->hasFile('image')) {
@@ -65,11 +64,31 @@ class HomeController extends Controller
             'city' => 'nullable|string',
             'phone_number' => 'nullable|string',
             'email' => 'nullable|string|email|unique:hotels,email',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
          $hotel = Hotel::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            if ($hotel->image && Storage::disk('public')->exists('hotel' . $hotel->image)) {
+                Storage::disk('public')->delete('hotel' . $hotel->image);
+            }
+
+            $image = $request->file('image');
+
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = $image->storeAs('hotel', $imageName, 'public');
+
+            $updateHotel['image'] = $path;
+        }
+
          $hotel->update($updateHotel);
-         return response()->json($updateHotel);
+
+        return response()->json([
+            'message' => 'Hotel updated successfully!',
+            'hotel' => $hotel,
+        ], 201);
+
 
     }
 
@@ -90,7 +109,7 @@ class HomeController extends Controller
         foreach ($headers as $header) {
 
             if ($header->image) {
-                $header->image_url = Storage::url($header->image);
+                $header->image_url = url('storage/' . $header->image);
             }
         }
 
@@ -129,13 +148,13 @@ class HomeController extends Controller
     {
         $validatedData = $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'content' =>'required|string'
+            'content' =>'nullable|string'
         ]);
         $header = Header::findOrFail($id);
 
         if ($request->hasFile('image')) {
             if ($header->image && Storage::disk('public')->exists('headers/' . $header->image)) {
-                Storage::disk('public')->delete('headers/' .$header->image);
+                Storage::disk('public')->delete('headers/' . $header->image);
             }
 
             $image = $request->file('image');
@@ -174,10 +193,9 @@ class HomeController extends Controller
         foreach ($mains as $main) {
 
             if ($main->image) {
-                $main->image_url = Storage::url($main->image);
+                $main->image_url = url('storage/' . $main->image);
             }
         }
-
         return response()->json($mains);
     }
 
@@ -212,13 +230,13 @@ class HomeController extends Controller
     {
         $validatedData = $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'content' =>'required|string'
+            'content' =>'nullable|string'
         ]);
         $main = Main::findOrFail($id);
 
         if ($request->hasFile('image')) {
-            if ($main->image && Storage::disk('public')->exists('headers/' . $main->image)) {
-                Storage::disk('public')->delete('mainss/' .$main->image);
+            if ($main->image && Storage::disk('public')->exists('mains/' . $main->image)) {
+                Storage::disk('public')->delete('mains/' .$main->image);
             }
 
             $image = $request->file('image');
@@ -254,7 +272,7 @@ class HomeController extends Controller
         foreach ($socials as $social) {
 
             if ($social->icon) {
-                $social->image_url = Storage::url($social->icon);
+                $social->image_url = url('storage/' . $social->icon);
             }
         }
         return response()->json($socials);
@@ -279,5 +297,43 @@ class HomeController extends Controller
             'message' => 'Social created successfully!',
             'main' => $social
         ], 201);
+    }
+
+    public function updateSocial($id, Request $request): \Illuminate\Http\JsonResponse
+    {
+        $validatedData = $request->validate([
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'url' =>'nullable|string'
+        ]);
+        $social = Social::findOrFail($id);
+
+        if ($request->hasFile('icon')) {
+            if ($social->icon && Storage::disk('public')->exists('socials/' . $social->icon)) {
+                Storage::disk('public')->delete('socials/' .$social->icon);
+            }
+
+            $icon = $request->file('icon');
+
+            $imageName = time() . '.' . $icon->getClientOriginalExtension();
+
+            $path = $icon->storeAs('socials', $imageName, 'public');
+
+            $validatedData['icon'] = $path;
+        }
+
+        $social->update($validatedData);
+
+        return response()->json([
+            'message' => 'Social updated successfully!',
+            'Social' => $social,
+        ], 201);
+
+    }
+
+    public function deleteSocial($id): \Illuminate\Http\JsonResponse
+    {
+        $deleteSocial = Social::findOrFail($id);
+        $deleteSocial->delete();
+        return response()->json(Social::all());
     }
 }
