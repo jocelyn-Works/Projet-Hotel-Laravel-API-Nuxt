@@ -16,6 +16,7 @@ class Hotel extends Model
         "city",
         "phone_number",
         "email",
+        "image",
     ];
 
 
