@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         "first_name",
-        "last_name", 
+        "last_name",
         'email',
         'password',
         "is_admin"
@@ -49,7 +49,7 @@ class User extends Authenticatable
     }
 
     // Relation one to many avec Guest
-    public function guests()
+    public function guests(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Guest::class, 'user_id', 'id');
     }
