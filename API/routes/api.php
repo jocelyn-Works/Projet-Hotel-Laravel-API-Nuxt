@@ -25,11 +25,9 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
     // recupère un user avec ses toutes ces commandes
     Route::get('/{id}/Orders/', 'getOrdersByUserId')->middleware('auth:sanctum');
 
-});//*******************************************************************************************************************
+});//******************
 
-
-
-//    HomeController  Hotel  Headear Main Social ***************************************************************************************************************
+//    HomeController  Hotel  Headear / Main / Social *****************************************************************
 Route::prefix('home')->controller(\App\Http\Controllers\HomeController::class)->group(function () {
     // Hotel
     // afficher les infos de hotel
@@ -84,4 +82,15 @@ Route::prefix('home')->controller(\App\Http\Controllers\HomeController::class)->
 
     // suprimer main
     Route::delete('/deleteSocial/{id}', 'deleteSocial');
-});//*******************************************************************************************************************
+});
+
+
+//***************************************   typeController**************************************************************
+Route::prefix('type')->controller(\App\Http\Controllers\TypeController::class)->group(function () {
+    // Tous les type de chambres
+    Route::get('/all', 'showTypes');
+
+    // ajouter un type de chambre
+    Route::post('/new',  'addType');
+
+});
