@@ -179,7 +179,7 @@ class HomeController extends Controller
     {
         $deleteHeader = Header::findOrFail($id);
         $deleteHeader->delete();
-        return response()->json(Hotel::all());
+        return response()->json(Header::all());
     }
 
 
