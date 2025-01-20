@@ -45,5 +45,6 @@ logs
 .idea
 
 # Local env files
+
 .env.*
 !.env.example
