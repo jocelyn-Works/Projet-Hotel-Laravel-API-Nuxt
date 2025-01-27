@@ -1,11 +1,15 @@
 # Projet-Hotel-Laravel-API-Nuxt
-# Projet-Hotel-Laravel-API-Nuxt
 
 
 
 >- __serveur :__
 >>```javascript
 >>php artisan serve
+>>```
+
+>- __regénerer les migrations:__
+>>```javascript
+>>php artisan migrate:refresh
 >>```
 
 > __make migration__
@@ -33,9 +37,8 @@
 >> php artisan make:Seeder Product
 >>```
 
->__seeder migration__
->>-  __php artisan migrate:fresh --seed__   
-     >>__Migrate + seed__
+>__seeder migration__ 
+>>__Migrate + seed__
 >>```javascript
 >> php artisan migrate:fresh --seed   
 >>```
