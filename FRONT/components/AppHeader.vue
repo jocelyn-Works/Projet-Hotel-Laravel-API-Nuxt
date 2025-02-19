@@ -1,47 +1,14 @@
 <template>
-<!--  <nav>-->
-<!--    <NuxtLink to="/">Accueil</NuxtLink>-->
-<!--    <NuxtLink to="/booking">Booking</NuxtLink>-->
-<!--  </nav>-->
-  <header class="app-header">
-
-    <!-- Image de fond -->
-    <div class="background-image"></div>
-
-    <!-- Logo -->
-    <div class="logo">
-      <img src="../public/ImagesHomepage/logo.png" alt="Hotel Logo" />
+  <header>
+    <div v-if="data && data.length > 0" class="h-[800px] bg-cover bg-center" :style="{ backgroundImage: `url(${data[0].image_url})` }">
+      
     </div>
-
-
+    <div class="flex flex-wrap items-center justify-center">
+        <p class=" p-8 text-white text-4xl ">{{ data[0].content }}</p>
+      </div>
   </header>
 </template>
 
-
-
-<style scoped>
-.app-header {
-  position: relative;
-  width: 100%;
-  height: 800px;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-}
-
-/* Image de fond */
-.background-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../public/ImagesHomepage/hotel-luxe.png');
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
-}
-
-</style>
-<script setup lang="ts">
+<script setup>
+const { data } = await useFetch('http://127.0.0.1:8000/api/home/header')
 </script>
