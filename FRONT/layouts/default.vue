@@ -1,5 +1,8 @@
 <template>
-  <AppHeader>
+  <main class="bg-theme-500">
 
-  </AppHeader>
+    <NuxtPage />
+ <AppFooter />
+  </main>
+ 
 </template>
