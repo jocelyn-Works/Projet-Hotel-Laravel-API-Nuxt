@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { data, error } = await useAsyncData("hotelData", () =>
-    $fetch("http://127.0.0.1:8000/api/home/main")
+const apiUrl = import.meta.env.VITE_API_URL
+const { data, error } = await useFetch(`${apiUrl}/home/main`
 );
 
 console.log("Données reçues :", data.value);
