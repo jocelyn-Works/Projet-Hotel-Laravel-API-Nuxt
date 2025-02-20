@@ -167,7 +167,7 @@ class HomeController extends Controller
         }
 
         $header->update($validatedData);
-
+    $header->save();
         return response()->json([
             'message' => 'Header updated successfully!',
             'header' => $header,

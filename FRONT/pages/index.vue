@@ -1,5 +1,6 @@
 <template>
-  <h1>Page Accueil</h1>
+
+  <HomeAppHeader />
   <Frise src="/ImagesHomepage/frise.svg" />
   <HomePresentation />
 </template>
