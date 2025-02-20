@@ -44,6 +44,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Satisfy: [400], 
+      Poppins: [400], 
     },
     display: 'swap',
   }
