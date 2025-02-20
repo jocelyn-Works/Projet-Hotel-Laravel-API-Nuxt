@@ -1,7 +1,8 @@
-<template>
+<template >
   <NuxtLayout>
-    <div class="min-h-screen bg-[#EDE4D9]">
-      <NuxtPage />
-    </div>
+    <main>
+
+    </main>
+
   </NuxtLayout>
 </template>
