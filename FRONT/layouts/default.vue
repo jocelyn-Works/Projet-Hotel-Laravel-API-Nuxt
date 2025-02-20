@@ -2,7 +2,7 @@
   <main class="bg-theme-500">
 
     <NuxtPage />
- <AppFooter />
   </main>
+  <AppFooter />
  
 </template>
