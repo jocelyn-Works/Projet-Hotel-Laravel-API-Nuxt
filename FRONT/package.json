@@ -10,8 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@iconify-json/ph": "^1.1.12",
     "@nuxt/ui": "^2.21.0",
-    "nuxt": "^3.15.1",
+    "@nuxtjs/axios": "^5.13.6",
+    "axios": "^1.6.8",
+    "nuxt": "^3.0.0",
+    "phosphor": "^0.7.1",
+    "unplugin-icons": "^0.18.5",
+    "unplugin-vue-components": "^0.26.0",
+    "v-calendar": "^3.1.2",
     "vue": "latest",
     "vue-router": "latest"
   }
