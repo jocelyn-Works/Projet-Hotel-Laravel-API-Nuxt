@@ -22,6 +22,20 @@ export default defineNuxtConfig({
               900: '#000000',
               950: '#000000'
             },
+            'pampas': {
+              DEFAULT: '#F9F9F6',
+              50: '#FFFFFF',
+              100: '#FFFFFF',
+              200: '#FFFFFF',
+              300: '#FFFFFF',
+              400: '#FFFFFF',
+              500: '#F9F9F6', //
+              600: '#E3E3D4',
+              700: '#CCCCB3',
+              800: '#B6B691',
+              900: '#9F9F6F',
+              950: '#929261'
+            },
             'theme': {
               DEFAULT: '#EDE4D9',
               50: '#FFFFFF',
