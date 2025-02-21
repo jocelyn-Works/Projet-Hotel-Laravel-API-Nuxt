@@ -1,13 +1,9 @@
 <template>
   <header class="relative">
     <!-- Image header -->
-    <div
-      v-if="data && data.length > 0"
-      class="h-[700px] md:h-[500px] lg:h-[600px] bg-cover bg-center"
-      :style="{ backgroundImage: `url(${data[0].image_url})`, opacity:1 }"
-    >
-  
-  </div>
+    <div v-if="data && data.length > 0" class=" h-[700px] md:h-[500px] lg:h-[700px] flex justify-center items-center">
+  <img :src="data[0].image_url" class="w-full h-full  clipPath" alt="Image de l'hôtel" />
+</div>
 
     <!-- logo -->
     <div
@@ -18,7 +14,7 @@
     </div>
 
      <!-- header -->
-    <div class="flex flex-wrap items-center justify-center m-4 p-8 relative">
+    <div class="flex flex-wrap items-center justify-center  p-8 relative">
       <p
         v-if="data && data.length > 0"
         class="satisfy text-dark-blue-500 font-bold text-4xl md:text-5xl lg:text-6xl text-center"
@@ -43,4 +39,10 @@ const { data: dataHotel } = await useFetch(`${apiUrl}/home/hotel`);
 .satisfy {
   font-family: 'Satisfy', cursive;
 }
+
+.clipPath{
+  clip-path: ellipse(100% 90% at 50% 0%);
+}
+
+
 </style>
