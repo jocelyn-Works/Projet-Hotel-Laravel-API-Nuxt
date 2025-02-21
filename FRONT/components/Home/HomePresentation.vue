@@ -15,7 +15,7 @@ console.log("Données reçues :", data.value);
                class="w-full h-64 object-cover rounded-lg shadow-lg"
                :alt="'Image ' + index"
                loading="lazy">
-          <p class=" popins mt-4 text-lg text-gray-700 px-4">{{ main.content }}</p>
+          <p class=" tahoma mt-4 text-lg font-bold text-justify text-gray-700 p-3 mx-3 px-4 ">{{ main.content }}</p>
         </div>
       </div>
 
@@ -25,7 +25,7 @@ console.log("Données reçues :", data.value);
 </template>
 
 <style>
-.popins{
-  font-family: 'Popins';
+.tahoma{
+  font-family: 'Tahoma';
 }
 </style>

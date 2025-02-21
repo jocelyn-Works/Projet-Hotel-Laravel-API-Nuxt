@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-pampas-500">
+  <main class="bg-theme-500">
 
     <NuxtPage />
   </main>
