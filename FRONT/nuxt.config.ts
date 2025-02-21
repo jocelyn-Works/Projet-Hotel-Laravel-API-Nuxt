@@ -36,7 +36,7 @@ export default defineNuxtConfig({
               900: '#9F9F6F',
               950: '#929261'
             },
-            'pampas': {
+            'gold': {
               DEFAULT: '#EDE4D9',
               50: '#FFFFFF',
               100: '#FFFFFF',
@@ -50,6 +50,20 @@ export default defineNuxtConfig({
               900: '#9C774A',
               950: '#896841'
             },
+            'hokey-pokey': {
+            DEFAULT: '#D39A31',
+            50: '#F3E4C8',
+            100: '#F0DCB7',
+            200: '#E9CB96',
+            300: '#E1BB74',
+            400: '#DAAA53',
+            500: '#D39A31',
+            600: '#A87A24',
+            700: '#7A581A',
+            800: '#4C3710',
+            900: '#1D1506',
+            950: '#060401'
+          },
           }
         }
       }
