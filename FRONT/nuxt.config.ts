@@ -23,6 +23,20 @@ export default defineNuxtConfig({
               950: '#000000'
             },
             'theme': {
+              DEFAULT: '#F9F9F6',
+              50: '#FFFFFF',
+              100: '#FFFFFF',
+              200: '#FFFFFF',
+              300: '#FFFFFF',
+              400: '#FFFFFF',
+              500: '#F9F9F6', // DEFAULT
+              600: '#E3E3D4',
+              700: '#CCCCB3',
+              800: '#B6B691',
+              900: '#9F9F6F',
+              950: '#929261'
+            },
+            'gold': {
               DEFAULT: '#EDE4D9',
               50: '#FFFFFF',
               100: '#FFFFFF',
@@ -36,6 +50,20 @@ export default defineNuxtConfig({
               900: '#9C774A',
               950: '#896841'
             },
+            'hokey-pokey': {
+            DEFAULT: '#D39A31',
+            50: '#F3E4C8',
+            100: '#F0DCB7',
+            200: '#E9CB96',
+            300: '#E1BB74',
+            400: '#DAAA53',
+            500: '#D39A31',
+            600: '#A87A24',
+            700: '#7A581A',
+            800: '#4C3710',
+            900: '#1D1506',
+            950: '#060401'
+          },
           }
         }
       }
@@ -44,7 +72,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Satisfy: [400],
-      Poppins: [400],
+      Tahoma: [400],
     },
     display: 'swap',
   }
