@@ -93,4 +93,7 @@ Route::prefix('type')->controller(\App\Http\Controllers\TypeController::class)->
     // ajouter un type de chambre
     Route::post('/new',  'addType');
 
+    // Mettre à jour un type de chambre
+    Route::post('/update/{id}', 'updateType');
+
 });
