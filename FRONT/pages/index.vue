@@ -1,13 +1,10 @@
 <template>
 
-  <HomeAppHeader />
-  <Frise src="/ImagesHomepage/frise.svg" />
-  <HomePresentation />
-  <RoomTypes />
-</template>
+    <HomeAppHeader />
+    <Frise src="/ImagesHomepage/frise.svg" />
+    <HomePresentation />
+    <HomeRoomTypes />
+    <Frise src="/ImagesHomepage/frise2.svg" />
+  </template>
 
-<script setup>
-  import Frise from "~/components/Frise.vue";
-  import HomePresentation from "~/components/Home/HomePresentation.vue";
-  import RoomTypes from "~/components/Home/RoomTypes.vue";
-</script>
+

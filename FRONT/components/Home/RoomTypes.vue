@@ -44,7 +44,7 @@ const selectRoom = (room: RoomType) => {
 </script>
 
 <template>
-  <div class="py-16 bg-[#F8F9FA]">
+  <div class="py-16 mt-5">
     <div class="container mx-auto">
 
       <!-- Menu des types de chambres -->
@@ -55,7 +55,7 @@ const selectRoom = (room: RoomType) => {
             href="#"
             @click.prevent="selectRoom(room)"
             class="text-xl font-semibold transition-colors duration-300"
-            :class="selectedRoom?.id === room.id ? 'underline text-blue-600' : 'text-gray-700 hover:text-blue-500'"
+            :class="selectedRoom?.id === room.id ? 'underline text-gold-700' : 'text-gray-700 hover:text-gold-700'"
         >
           {{ room.name }}
         </a>
@@ -76,7 +76,7 @@ const selectRoom = (room: RoomType) => {
         </div>
 
         <!-- Colonne droite : Informations sur la chambre -->
-        <div class="bg-white p-6 shadow-xl rounded-lg flex flex-col h-full">
+        <div class=" p-6 shadow-xl rounded-lg flex flex-col h-full">
           <!-- Titre centré horizontalement -->
           <h2 class="text-3xl font-bold text-gray-800 mb-3 text-center">
             {{ selectedRoom.name }}
@@ -94,7 +94,7 @@ const selectRoom = (room: RoomType) => {
             <p class="text-2xl font-semibold text-blue-600 mb-4">
               {{ selectedRoom.price }}€ <span class="text-base font-normal">/ nuit</span>
             </p>
-            <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition-colors">
+            <button class="bg-blue-600 hover:bg-gold-500 text-white font-semibold py-2 px-4 rounded-md transition-colors">
               Réserver
             </button>
           </div>
