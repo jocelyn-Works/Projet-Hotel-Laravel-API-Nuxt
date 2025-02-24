@@ -15,7 +15,7 @@ class SocialSeeder extends Seeder
     {
         DB::table('socials')->insert([
             "icon" => "socials/1740405526.svg",
-            "url" => "https://facebook.com",
+            "url" => "www.facebook.com",
             'created_at' => now(),
             'updated_at' => now(),
 
