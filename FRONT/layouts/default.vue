@@ -4,5 +4,5 @@
     <NuxtPage />
   </main>
   <AppFooter />
- 
+
 </template>

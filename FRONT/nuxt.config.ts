@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   tailwindcss: {
     config: {
       theme: {
-        extend: { 
+        extend: {
           colors: {
             'dark-blue': {
               DEFAULT: '#183456',
@@ -71,8 +71,8 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Satisfy: [400], 
-      Tahoma: [400], 
+      Satisfy: [400],
+      Tahoma: [400],
     },
     display: 'swap',
   }
