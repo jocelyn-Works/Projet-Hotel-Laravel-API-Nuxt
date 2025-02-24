@@ -1,4 +1,5 @@
 <template>
+  <HomeAppNav />
   <main class="bg-theme-500">
 
     <NuxtPage />

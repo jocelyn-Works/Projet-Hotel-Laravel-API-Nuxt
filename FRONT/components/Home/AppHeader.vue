@@ -29,7 +29,7 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 
 // header
-const { data } = await useFetch(`${apiUrl}/home/header`);
+const { data } = await useFetch(`${apiUrl}/header/all`);
 
 // hôtel
 const { data: dataHotel } = await useFetch(`${apiUrl}/home/hotel`);
@@ -41,7 +41,7 @@ const { data: dataHotel } = await useFetch(`${apiUrl}/home/hotel`);
 }
 
 .clipPath{
-  clip-path: ellipse(100% 90% at 50% 0%);
+  clip-path: ellipse(90% 100% at 50% 0%);
 }
 
 
