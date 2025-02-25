@@ -13,7 +13,3 @@
     <img :src="src" alt="Frise" class="max-w-full m-4"/>
   </div>
 </template>
-
-<style scoped>
-
-</style>

@@ -1,0 +1,49 @@
+
+
+/*******************  FONTS ********************/
+
+.satisfy {
+    font-family: 'Satisfy', cursive;
+}
+
+.tahoma{
+    font-family: 'Tahoma';
+}
+
+
+
+/**********  FORM ***********/
+
+.form-control {
+    @apply relative mb-10 w-[300px] text-dark-blue text-2xl;
+  }
+  
+  .form-control input {
+    @apply bg-transparent border-0 border-b-2 border-dark-blue-500 block w-full py-3.5;
+  }
+  
+  .form-control input:focus,
+  .form-control input:valid,
+  .form-control:focus-within input {
+    @apply outline-none border-b-dark-blue-500;
+  }
+  
+  .form-control label {
+    @apply absolute top-3.5 left-0 pointer-events-none satisfy;
+  }
+  
+  .form-control label span {
+    @apply inline-block  min-w-[5px] transition-transform duration-500 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)];
+  }
+  
+  .form-control input:focus + label span,
+  .form-control input:valid + label span,
+  .form-control:focus-within + label span {
+    @apply text-dark-blue-500 -translate-y-8;
+  }
+
+
+
+
+
+

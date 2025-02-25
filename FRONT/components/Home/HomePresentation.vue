@@ -25,7 +25,5 @@ console.log("Données reçues :", data.value);
 </template>
 
 <style>
-.tahoma{
-  font-family: 'Tahoma';
-}
+
 </style>

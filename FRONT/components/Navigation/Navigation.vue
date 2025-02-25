@@ -1,7 +1,8 @@
 <template>
+
     <nav class="fixed top-0 left-0 w-full md:w-2/5 bg-belgian-500 border border-dark-blue-500 rounded-br-lg z-10">
-      <div class="flex justify-between bg-dark-blue-500 p-4">
-        <button>Connexion</button>
+      <div class="flex justify-between items-center bg-dark-blue-500 p-4">
+        <ButtonConnexion  />
         <UIcon name="heroicons-solid:x-mark" class="w-6 h-6 text-white cursor-pointer" @click="closeNavigation" />
       </div>
       <div class="p-6 satisfy text-dark-blue-500">
@@ -11,12 +12,12 @@
             <li>Bars et Restaurants</li>
         </ul>
       </div>
-      <AppFooter />
+      <AppFooter class="rounded-br-lg" />
     </nav>
+
   </template>
   
   <script setup>
-  import { defineEmits } from 'vue';
   
   const emit = defineEmits(['close']);
   
@@ -25,10 +26,5 @@
   };
   </script>
 
-    <style>
-        .satisfy {
-        font-family: 'Satisfy', cursive;
-        }
-        
-    </style>
+
   
