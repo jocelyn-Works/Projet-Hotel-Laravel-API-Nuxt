@@ -10,6 +10,15 @@
     font-family: 'Tahoma';
 }
 
+/************    button ************/
+
+.btn-primary{
+  @apply p-2 bg-dark-blue-500 rounded-lg w-full;
+}
+
+.btn-primary:hover{
+  @apply bg-theme-500 border border-dark-blue-500 hover:text-dark-blue-500
+}
 
 
 /**********  FORM ***********/
