@@ -19,7 +19,7 @@
   </transition>
 
   <transition name="slide">
-    <NavigationSignup v-if="activeComponent === 'inscription'"  />
+    <NavigationSignup v-if="activeComponent === 'signup'"  />
   </transition>
 
  
@@ -27,7 +27,6 @@
 
 <script setup>
 
-import { NavigationLogin } from '#components';
 import { storeToRefs } from 'pinia';
 import { useUiStore } from '~/stores/ui';
 

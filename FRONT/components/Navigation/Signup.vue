@@ -3,7 +3,7 @@
 
       <div class="flex items-center w-full bg-dark-blue-500 p-4">
         <UIcon name="heroicons-solid:x-mark" class="w-6 h-6 text-white cursor-pointer" @click="closeSignup" />
-        <h2 class="text-theme-500 text-3xl satisfy flex-grow text-center">Inscription</h2>
+        <h2 class="text-theme-500 text-4xl satisfy flex-grow text-center">Inscription</h2>
       </div>
 
       <div class="flex justify-center w-full   p-10 ">

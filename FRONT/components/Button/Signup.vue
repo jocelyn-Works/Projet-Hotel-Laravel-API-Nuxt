@@ -15,7 +15,7 @@
     const uiStore = useUiStore();
     
     const openSignup = () => {
-      uiStore.setActiveComponent('inscription');
+      uiStore.setActiveComponent('signup');
     };
     
     
