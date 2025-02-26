@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 // Définir un type pour les composants possibles
-type ComponentName = 'navigation' | 'login' | 'dates' | 'inscription' | null;
+type ComponentName = 'navigation' | 'login'  | 'signup' | 'dates'| 'cart' | null;
 
 export const useUiStore = defineStore('ui', {
   state: () => ({

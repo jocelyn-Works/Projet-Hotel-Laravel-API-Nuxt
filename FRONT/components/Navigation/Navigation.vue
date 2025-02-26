@@ -6,7 +6,12 @@
         <UIcon name="heroicons-solid:x-mark" class="w-6 h-6 text-white cursor-pointer" @click="closeNavigation" />
       </div>
       <div class="p-6 satisfy text-dark-blue-500">
-        <ul class="text-2xl p-5">
+        <ul class="text-2xl p-5 m-3">
+            <li>
+              <NuxtLink to="/" class="hover:text-gold-300">Accueil</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/booking" class="hover:text-gold-300">Booking</NuxtLink></li>
             <li>Mes reservations</li>
             <li>Chambres et suites</li>
             <li>Bars et Restaurants</li>

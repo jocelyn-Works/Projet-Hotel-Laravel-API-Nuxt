@@ -10,6 +10,12 @@
     font-family: 'Tahoma';
 }
 
+/*************   BODY  **************/
+
+li{
+  @apply m-4;
+}
+
 /************    button ************/
 
 .btn-primary{
