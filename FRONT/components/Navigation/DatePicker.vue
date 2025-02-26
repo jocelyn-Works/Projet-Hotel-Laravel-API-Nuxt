@@ -6,7 +6,13 @@
         <UIcon name="heroicons-solid:x-mark" class="w-6 h-6 text-white cursor-pointer" @click="closeDates" />
         <h2 class="text-theme-500 text-3xl satisfy flex-grow text-center">Dates</h2>
       </div>
-      <div class="w-full h-full">
+      <div class="w-full h-full p-4">
+
+
+        <div class="">
+
+        </div>
+
 
         
       </div>
@@ -19,14 +25,13 @@
   </template>
 
 <script setup>
+import { useUiStore } from '~/stores/ui';
 
-// btn close 
+const uiStore = useUiStore();
 
-const emit = defineEmits(['close']);
-  
-  const closeDates = () => {
-    emit('close');
-  };
+const closeDates = () => {
+  uiStore.closeComponent();
+};
 </script>
 
 <style scoped>

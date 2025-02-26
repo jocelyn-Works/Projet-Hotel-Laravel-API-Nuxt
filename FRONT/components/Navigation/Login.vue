@@ -1,9 +1,8 @@
 <template>
-
     <section class="fixed top-0 right-0 w-full md:w-2/5 bg-belgian-500 border border-dark-blue-500 rounded-bl-lg z-10">
 
       <div class="flex items-center w-full bg-dark-blue-500 p-4">
-        <UIcon name="heroicons-solid:x-mark" class="w-6 h-6 text-white cursor-pointer" @click="closeConnexion" />
+        <UIcon name="heroicons-solid:x-mark" class="w-6 h-6 text-white cursor-pointer" @click="closeLogin" />
         <h2 class="text-theme-500 text-3xl satisfy flex-grow text-center">Connexion</h2>
       </div>
 
@@ -24,12 +23,13 @@
         
 
         
-        <button class="p-2 bg-dark-blue-500 rounded-lg w-full ">Connexion</button>
+        <button class="btn-primary ">Connexion</button>
 
       </form>
 
     </div>
 
+    <ButtonSignup />
 
     </section>
 
@@ -39,6 +39,9 @@
 
 
 import { onMounted } from 'vue';
+import { useUiStore } from '~/stores/ui';
+
+const uiStore = useUiStore();
 
 onMounted(() => {
   const labels = document.querySelectorAll(".form-control label");
@@ -55,11 +58,9 @@ onMounted(() => {
 
 // btn close 
 
-const emit = defineEmits(['close']);
-  
-  const closeConnexion = () => {
-    emit('close');
-  };
+const closeLogin = () => {
+  uiStore.closeComponent();
+};
 </script>
 
 <style scoped>
