@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
+
 
 
 // *************************************   HotelController    *******************************************************
@@ -88,4 +92,22 @@ Route::prefix('type')->controller(\App\Http\Controllers\TypeController::class)->
     // Mettre à jour un type de chambre
     Route::post('/update/{id}', 'updateType');
 
+    // Supprime un type de chambre
+    Route::delete('/delete/{id}', 'deleteType');
+
 });
+
+Route::prefix('connexion')->controller(\App\Http\Controllers\AuthController::class)->group(function () {
+    // Se créer un compte/Register
+    Route::post('/register', 'register')->name('register');
+
+    // Se connecter/Login
+    Route::post('/login', 'login')->name('login');
+
+    // Se déconnecter/Logout
+    Route::post('/logout', 'logout')->middleware('auth:sanctum');
+
+
+});
+
+

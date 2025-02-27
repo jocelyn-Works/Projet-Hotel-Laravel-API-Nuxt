@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id('id')->primary();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone');
+            $table->string('address');
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
