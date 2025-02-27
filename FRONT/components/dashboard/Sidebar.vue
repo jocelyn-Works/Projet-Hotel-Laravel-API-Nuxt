@@ -20,9 +20,9 @@
     <!-- 🔹 Bouton Voir le site -->
     <button
         @click="redirectToSite"
-        class="mt-auto bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+        class="mt-auto bg-white text-gold-500 px-4 py-2 rounded hover:bg-gold-500 transition hover:text-white"
     >
-      🌍 Voir le site
+      Voir le site
     </button>
   </aside>
 </template>
