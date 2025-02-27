@@ -10,7 +10,7 @@
       <div v-else class="text-sm">Aucune donnée</div>
     </div>
 
-  
+
 
     <!-- Bas du footer -->
     <div class=" p-2 flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-4 md:space-y-0">

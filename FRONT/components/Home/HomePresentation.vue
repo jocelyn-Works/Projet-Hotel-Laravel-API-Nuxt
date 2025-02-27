@@ -3,7 +3,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const { data, error } = await useFetch(`${apiUrl}/main/all`
 );
 
-console.log("Données reçues :", data.value);
+// console.log("Données reçues :", data.value);
 </script>
 
 <template>

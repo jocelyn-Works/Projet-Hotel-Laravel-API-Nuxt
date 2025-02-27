@@ -6,6 +6,5 @@
     <HomeRoomTypes />
     <Frise src="/ImagesHomepage/frise2.svg" />
   </template>
-  
-  
- 
+
+
