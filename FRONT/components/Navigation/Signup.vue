@@ -22,7 +22,7 @@
         </div>
 
         <div class="form-control">
-            <input type="number" name="phone" id="phone" required>
+            <input type="text" name="phone" id="phone" required>
             <label for="phone"> Telephone </label>
         </div>
 
