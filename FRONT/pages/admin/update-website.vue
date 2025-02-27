@@ -6,6 +6,8 @@ definePageMeta({
   layout: "admin"
 });
 
+const apiURL = import.meta.env.apiURL;
+
 const hotelData = ref({});
 const mainData = ref([]);
 const headerData = ref({});
@@ -16,7 +18,7 @@ const hotelId = ref(null);
 async function fetchData() {
   try {
     // Charger l'hôtel
-    const hotelResponse = await fetch("http://127.0.0.1:8000/api/home/hotel");
+    const hotelResponse = await fetch("http://127.0.0.1:8000/api/hotel/all");
     const hotelResult = await hotelResponse.json();
     if (hotelResult.length > 0) {
       hotelData.value = { ...hotelResult[0] };
@@ -24,21 +26,21 @@ async function fetchData() {
     }
 
     // Charger le main
-    const mainResponse = await fetch("http://127.0.0.1:8000/api/home/main");
+    const mainResponse = await fetch("http://127.0.0.1:8000/api/main/all");
     const mainResult = await mainResponse.json();
     if (mainResult.length > 0) {
       mainData.value = mainResult; // 🔥 Stocke tous les éléments de Main
     }
 
     // Charger le header
-    const headerResponse = await fetch("http://127.0.0.1:8000/api/home/header");
+    const headerResponse = await fetch("http://127.0.0.1:8000/api/header/all");
     const headerResult = await headerResponse.json();
     if (headerResult.length > 0) {
       headerData.value = { ...headerResult[0] };
     }
 
     // Charger le social
-    const socialResponse = await fetch("http://127.0.0.1:8000/api/home/social");
+    const socialResponse = await fetch("http://127.0.0.1:8000/api/social/all");
     const socialResult = await socialResponse.json();
     if (socialResult.length > 0) {
       socialData.value = { ...socialResult[0] };
@@ -68,12 +70,12 @@ onMounted(fetchData);
     <div v-if="hotelId" class="mb-8">
       <h2 class="text-xl font-semibold mb-2">Modifier l'Hôtel</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <UpdateField label="Nom de l'hôtel" api-field="name" :url="`http://127.0.0.1:8000/api/home/updateHotel/${hotelId}`" v-model="hotelData.name" />
-        <UpdateField label="Adresse" api-field="street" :url="`http://127.0.0.1:8000/api/home/updateHotel/${hotelId}`" v-model="hotelData.street" />
-        <UpdateField label="Ville" api-field="city" :url="`http://127.0.0.1:8000/api/home/updateHotel/${hotelId}`" v-model="hotelData.city" />
-        <UpdateField label="Téléphone" api-field="phone_number" :url="`http://127.0.0.1:8000/api/home/updateHotel/${hotelId}`" v-model="hotelData.phone_number" />
-        <UpdateField label="Email" api-field="email" :url="`http://127.0.0.1:8000/api/home/updateHotel/${hotelId}`" v-model="hotelData.email" />
-        <UpdateField label="Logo de l'hôtel" api-field="image" type="file" :url="`http://127.0.0.1:8000/api/home/updateHotel/${hotelId}`" />
+        <UpdateField label="Nom de l'hôtel" api-field="name" :url="`http://127.0.0.1:8000/api/hotel/update/${hotelId}`" v-model="hotelData.name" />
+        <UpdateField label="Adresse" api-field="street" :url="`http://127.0.0.1:8000/api/hotel/update/${hotelId}`" v-model="hotelData.street" />
+        <UpdateField label="Ville" api-field="city" :url="`http://127.0.0.1:8000/api/hotel/update/${hotelId}`" v-model="hotelData.city" />
+        <UpdateField label="Téléphone" api-field="phone_number" :url="`http://127.0.0.1:8000/api/hotel/update/${hotelId}`" v-model="hotelData.phone_number" />
+        <UpdateField label="Email" api-field="email" :url="`http://127.0.0.1:8000/api/hotel/update/${hotelId}`" v-model="hotelData.email" />
+        <UpdateField label="Logo de l'hôtel" api-field="image" type="file" :url="`http://127.0.0.1:8000/api/hotel/update/${hotelId}`" />
       </div>
     </div>
 
@@ -81,8 +83,8 @@ onMounted(fetchData);
     <div class="mb-8">
       <h2 class="text-xl font-semibold mb-2">Modifier le Header</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <UpdateField label="Contenu" api-field="content" :url="`http://127.0.0.1:8000/api/home/updateHeader/1`" v-model="headerData.content" />
-        <UpdateField label="Image du Header" api-field="image" type="file" :url="`http://127.0.0.1:8000/api/home/updateHeader/1`" />
+        <UpdateField label="Contenu" api-field="content" :url="`http://127.0.0.1:8000/api/header/update/1`" v-model="headerData.content" />
+        <UpdateField label="Image du Header" api-field="image" type="file" :url="`http://127.0.0.1:8000/api/header/update/1`" />
       </div>
     </div>
 
@@ -94,14 +96,14 @@ onMounted(fetchData);
           <UpdateField
               :label="`Contenu ${main.id}`"
               api-field="content"
-              :url="`http://127.0.0.1:8000/api/home/updateMain/${main.id}`"
+              :url="`http://127.0.0.1:8000/api/main/update/${main.id}`"
               v-model="main.content"
           />
           <UpdateField
               :label="`Image ${main.id}`"
               api-field="image"
               type="file"
-              :url="`http://127.0.0.1:8000/api/home/updateMain/${main.id}`"
+              :url="`http://127.0.0.1:8000/api/main/update/${main.id}`"
           />
         </template>
       </div>
@@ -111,7 +113,7 @@ onMounted(fetchData);
     <div>
       <h2 class="text-xl font-semibold mb-2">Modifier les Réseaux Sociaux</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <UpdateField label="Lien du Réseau Social" api-field="url" :url="`http://127.0.0.1:8000/api/home/updateSocial/1`" v-model="socialData.url" />
+        <UpdateField label="Lien du Réseau Social" api-field="url" :url="`http://127.0.0.1:8000/api/social/update/1`" v-model="socialData.url" />
       </div>
     </div>
   </div>

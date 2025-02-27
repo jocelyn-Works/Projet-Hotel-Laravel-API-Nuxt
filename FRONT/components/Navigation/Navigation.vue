@@ -15,6 +15,9 @@
             <li>Mes reservations</li>
             <li>Chambres et suites</li>
             <li>Bars et Restaurants</li>
+          <li>
+            <NuxtLink to="/admin" class="hover:text-gold-300">Dashbord</NuxtLink>
+          </li>
         </ul>
       </div>
       <AppFooter class="rounded-br-lg" />
