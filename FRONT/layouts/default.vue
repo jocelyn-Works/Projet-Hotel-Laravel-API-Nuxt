@@ -22,7 +22,7 @@
     <NavigationSignup v-if="activeComponent === 'signup'"  />
   </transition>
 
- 
+
 </template>
 
 <script setup>
