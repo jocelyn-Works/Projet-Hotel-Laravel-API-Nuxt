@@ -18,7 +18,7 @@
 
         <div class="form-control">
             <input type="text" name="firstName" id="firstName" required>
-            <label for="firstName"> Prenom </label>
+            <label for="firstName"> Prénom </label>
         </div>
 
         <div class="form-control">
