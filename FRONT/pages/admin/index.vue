@@ -1,10 +1,9 @@
 <script setup>
+import DashboardCard from '@/components/dashboard/DashboardCard.vue';
+
 definePageMeta({
   layout: 'admin'
 });
-
-
-import DashboardCard from '@/components/dashboard/DashboardCard.vue';
 </script>
 
 <template>

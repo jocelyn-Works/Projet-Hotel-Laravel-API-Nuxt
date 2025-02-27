@@ -1,40 +1,60 @@
+<!--
+===================================================
+💡 Guide pour ajouter une nouvelle page au dashboard
+===================================================
+
+1️⃣ **Créer un nouveau fichier de page**
+   - Dans le dossier `pages/admin/`, crée un nouveau fichier `.vue`
+   - Exemple : `pages/admin/nouvelle-page.vue`
+
+2️⃣ **Définir le layout du dashboard**
+   - Dans le fichier de la nouvelle page, ajoute en haut :
+     ```vue
+     <script setup>
+     definePageMeta({
+       layout: 'admin'
+     });
+     </script>
+     ```
+   - Cela permet d'utiliser la structure du dashboard (`admin.vue`).
+
+3️⃣ **Ajouter un lien dans la sidebar**
+   - Ouvre `Sidebar.vue` et ajoute un nouvel élément dans `menuItems` :
+     ```vue
+     const menuItems = [
+       { name: "Dashboard", link: "/admin" },
+       { name: "Mise à jour du site", link: "/admin/update-website" },
+       { name: "Nouvelle Page", link: "/admin/nouvelle-page" }
+     ];
+     ```
+
+4️⃣ **Sauvegarder et tester**
+   - Recharge la page.
+   - Le lien de la nouvelle page devrait apparaître dans la sidebar et être accessible.
+
+🚀 **C'est tout ! La nouvelle page est maintenant intégrée au dashboard !**
+
+-->
+
 <template>
   <div class="flex h-screen bg-gray-100">
     <!-- Sidebar -->
-    <aside class="w-64 bg-[#183456] text-white p-4 flex flex-col">
-      <h2 class="text-center text-2xl font-bold mb-6">Admin Panel</h2>
-      <nav>
-        <ul>
-          <li class="mb-4">
-            <a href="#" class="block p-2 rounded hover:bg-white hover:text-[#183456]">Dashboard</a>
-          </li>
-          <li class="mb-4">
-            <a href="#" class="block p-2 rounded hover:bg-white hover:text-[#183456]">Utilisateurs</a>
-          </li>
-          <li class="mb-4">
-            <a href="#" class="block p-2 rounded hover:bg-white hover:text-[#183456]">Paramètres</a>
-          </li>
-        </ul>
-      </nav>
-    </aside>
+    <Sidebar class="w-64" />
 
     <!-- Contenu principal -->
     <div class="flex-1 flex flex-col">
       <!-- Header -->
-      <header class="bg-white shadow-md p-4 text-center text-xl font-semibold">
-        <img src="/logo.png" alt="Logo" class="mx-auto h-12">
+      <header class=" flex justify-center items-center pt-6 ml-64">
+        <img src="/logo.png" alt="Logo" class="max-h-24 w-auto">
       </header>
-
-      <!-- Contenu -->
-      <main class="p-6 flex-1">
-        <slot />
+      <!-- Contenu dynamique -->
+      <main class="p-6 flex-1 ml-64">
+        <NuxtPage />
       </main>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "AdminLayout"
-};
+<script setup>
+import Sidebar from '@/components/dashboard/Sidebar.vue';
 </script>

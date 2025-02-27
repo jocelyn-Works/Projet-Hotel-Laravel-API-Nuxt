@@ -1,44 +1,75 @@
 <template>
   <div class="bg-white p-4 rounded shadow-md">
     <label class="block font-semibold mb-2">{{ label }}</label>
-    <input v-if="type !== 'file'" v-model="value" class="border p-2 w-full" />
-    <input v-else type="file" @change="handleFileUpload" class="border p-2 w-full" />
+
+    <!-- Champ texte -->
+    <input
+        v-if="type !== 'file'"
+        :value="value"
+        @input="updateValue($event.target.value)"
+        class="border p-2 w-full"
+    />
+
+    <!-- Champ fichier -->
+    <input
+        v-else
+        type="file"
+        @change="handleFileUpload"
+        class="border p-2 w-full"
+    />
 
     <div class="mt-2 flex gap-2">
       <button @click="updateData" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
-      <button @click="deleteData" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from "vue";
 
-defineProps({
+const props = defineProps({
   label: String,
   apiField: String,
-  type: { type: String, default: 'text' }
+  type: { type: String, default: "text" },
+  url: String,
+  modelValue: String, // Donnée initiale venant de l'API
 });
 
-const value = ref('');
+const emit = defineEmits(["update:modelValue"]); // 🔥 Ajoute l'événement pour modifier `hotelData`
+
+const value = ref(props.modelValue || "");
+
+// ✅ Met à jour la valeur locale et émet un événement au parent
+function updateValue(newValue) {
+  value.value = newValue;
+  emit("update:modelValue", newValue); // 🔥 Met à jour `hotelData` dans `update-website.vue`
+}
+
+// 🔄 Mise à jour auto si les données changent dans `update-website.vue`
+watch(() => props.modelValue, (newValue) => {
+  value.value = newValue;
+});
 
 function handleFileUpload(event) {
   value.value = event.target.files[0];
+  emit("update:modelValue", value.value);
 }
 
 async function updateData() {
-  const formData = new FormData();
-  formData.append(apiField, value.value);
+  try {
+    const formData = new FormData();
+    formData.append(props.apiField, value.value);
 
-  await fetch(`http://localhost:8000/api/site`, {
-    method: 'PUT',
-    body: formData
-  });
-}
+    const response = await fetch(props.url, {
+      method: "POST", // 🔥 Laravel attend POST, pas PUT !
+      body: formData,
+    });
 
-async function deleteData() {
-  await fetch(`http://localhost:8000/api/site/${apiField}`, {
-    method: 'DELETE'
-  });
+    if (!response.ok) throw new Error("Échec de la mise à jour");
+
+    alert("Mise à jour réussie !");
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour :", error);
+  }
 }
 </script>
