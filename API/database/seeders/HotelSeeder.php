@@ -19,7 +19,7 @@ class HotelSeeder extends Seeder
             'city' => "PARIS",
             'phone_number' => "+33 45 45 45 45",
             'email' => "artichaut@email.com",
-            'image' => "hotel/1740404101.png",
+            'image' => "hotel/1740664910.png",
             'created_at' => now(),
             'updated_at' => now(),
         ]);
