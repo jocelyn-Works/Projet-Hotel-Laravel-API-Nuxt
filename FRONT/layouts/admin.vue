@@ -37,7 +37,7 @@
 -->
 
 <template>
-  <div class="flex h-screen bg-gray-100">
+  <div class="min-h-screen bg-[#F9F9F6]">
     <!-- Sidebar -->
     <Sidebar class="w-64" />
 
