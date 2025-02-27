@@ -19,7 +19,7 @@
     />
 
     <div class="mt-2 flex gap-2">
-      <button @click="updateData" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+      <button @click="updateData" class="bg-[#183456] text-white px-4 py-2 rounded">Update</button>
     </div>
   </div>
 </template>
