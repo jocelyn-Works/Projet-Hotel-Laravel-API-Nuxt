@@ -92,6 +92,8 @@ Route::prefix('type')->controller(\App\Http\Controllers\TypeController::class)->
     // Mettre à jour un type de chambre
     Route::post('/update/{id}', 'updateType');
 
+    // Mettre à jour image par image ajouter par eric
+    Route::post('/updateImage/{id}', 'updateTypeImage');
     // Supprime un type de chambre
     Route::delete('/delete/{id}', 'deleteType');
 
