@@ -2,11 +2,21 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@nuxtjs/google-fonts'],
+  modules: [
+    '@nuxt/ui', 
+    '@nuxtjs/google-fonts', 
+    '@pinia/nuxt'],
+    build: {
+      transpile: ['@pinia/nuxt'],
+    },
+  css: [
+    'assets/css/index.css',
+    
+  ],
   tailwindcss: {
     config: {
       theme: {
-        extend: { 
+        extend: {
           colors: {
             'dark-blue': {
               DEFAULT: '#183456',
@@ -36,7 +46,7 @@ export default defineNuxtConfig({
               900: '#9F9F6F',
               950: '#929261'
             },
-            'gold': {
+            'belgian': {
               DEFAULT: '#EDE4D9',
               50: '#FFFFFF',
               100: '#FFFFFF',
@@ -50,14 +60,14 @@ export default defineNuxtConfig({
               900: '#9C774A',
               950: '#896841'
             },
-            'hokey-pokey': {
+            'gold': {
             DEFAULT: '#D39A31',
             50: '#F3E4C8',
             100: '#F0DCB7',
             200: '#E9CB96',
             300: '#E1BB74',
             400: '#DAAA53',
-            500: '#D39A31',
+            500: '#D39A31',  //  DEFAULT
             600: '#A87A24',
             700: '#7A581A',
             800: '#4C3710',
@@ -71,8 +81,8 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Satisfy: [400], 
-      Tahoma: [400], 
+      Satisfy: [400],
+      Tahoma: [400],
     },
     display: 'swap',
   }

@@ -1,9 +1,9 @@
 <script setup>
 const apiUrl = import.meta.env.VITE_API_URL;
-const { data, error } = await useFetch(`${apiUrl}/home/main`
+const { data, error } = await useFetch(`${apiUrl}/main/all`
 );
 
-console.log("Données reçues :", data.value);
+// console.log("Données reçues :", data.value);
 </script>
 
 <template>
@@ -25,7 +25,5 @@ console.log("Données reçues :", data.value);
 </template>
 
 <style>
-.tahoma{
-  font-family: 'Tahoma';
-}
+
 </style>
