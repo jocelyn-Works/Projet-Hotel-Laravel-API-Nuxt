@@ -9,11 +9,7 @@
 </script>
 
 <template>
-  <div class="flex justify-center items-center w-full p-2">
+  <div class="flex justify-center items-center w-full p-3">
     <img :src="src" alt="Frise" class="max-w-full m-4"/>
   </div>
 </template>
-
-<style scoped>
-
-</style>
