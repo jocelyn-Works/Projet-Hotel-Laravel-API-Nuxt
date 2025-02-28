@@ -3,29 +3,35 @@
     <label class="block font-semibold mb-2">{{ label }}</label>
 
     <!-- Champ texte -->
-    <input
-        v-if="type !== 'file'"
-        :value="value"
-        @input="updateValue($event.target.value)"
-        class="border p-2 w-full"
-    />
+    <div v-if="type !== 'file'">
+      <!-- Utilisation de UInput de NuxtUI pour le champ texte -->
+      <UInput v-model="value" class="w-full" />
+    </div>
 
     <!-- Champ fichier -->
-    <input
-        v-else
-        type="file"
-        @change="handleFileUpload"
-        class="border p-2 w-full"
-    />
+    <div v-else>
+      <input
+          type="file"
+          @change="handleFileUpload"
+          class="border p-2 w-full"
+      />
+    </div>
 
     <div class="mt-2 flex gap-2">
-      <button @click="updateData" class="bg-[#183456] text-white px-4 py-2 rounded">Update</button>
+      <!-- Utilisation de UButton de NuxtUI pour le bouton Update -->
+      <UButton
+          @click="updateData"
+          class="bg-[#183456] hover:bg-gold-500 text-white px-4 py-2 rounded"
+      >
+        Update
+      </UButton>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, watch } from "vue";
+
 
 const props = defineProps({
   label: String,
@@ -35,17 +41,17 @@ const props = defineProps({
   modelValue: String, // Donnée initiale venant de l'API
 });
 
-const emit = defineEmits(["update:modelValue"]); // Ajoute l'événement pour modifier `hotelData`
+const emit = defineEmits(["update:modelValue"]);
 
 const value = ref(props.modelValue || "");
 
-// Met à jour la valeur locale et émet un événement au parent
+// Met à jour la valeur locale et émet l'événement pour mettre à jour le parent
 function updateValue(newValue) {
   value.value = newValue;
   emit("update:modelValue", newValue);
 }
 
-//  Mise à jour auto si les données changent dans `update-website.vue`
+// Mise à jour automatique si la prop change
 watch(() => props.modelValue, (newValue) => {
   value.value = newValue;
 });
