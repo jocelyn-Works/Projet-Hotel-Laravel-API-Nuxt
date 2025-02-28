@@ -35,17 +35,17 @@ const props = defineProps({
   modelValue: String, // Donnée initiale venant de l'API
 });
 
-const emit = defineEmits(["update:modelValue"]); // 🔥 Ajoute l'événement pour modifier `hotelData`
+const emit = defineEmits(["update:modelValue"]); // Ajoute l'événement pour modifier `hotelData`
 
 const value = ref(props.modelValue || "");
 
-// ✅ Met à jour la valeur locale et émet un événement au parent
+// Met à jour la valeur locale et émet un événement au parent
 function updateValue(newValue) {
   value.value = newValue;
-  emit("update:modelValue", newValue); // 🔥 Met à jour `hotelData` dans `update-website.vue`
+  emit("update:modelValue", newValue);
 }
 
-// 🔄 Mise à jour auto si les données changent dans `update-website.vue`
+//  Mise à jour auto si les données changent dans `update-website.vue`
 watch(() => props.modelValue, (newValue) => {
   value.value = newValue;
 });
@@ -61,7 +61,7 @@ async function updateData() {
     formData.append(props.apiField, value.value);
 
     const response = await fetch(props.url, {
-      method: "POST", // 🔥 Laravel attend POST, pas PUT !
+      method: "POST",
       body: formData,
     });
 

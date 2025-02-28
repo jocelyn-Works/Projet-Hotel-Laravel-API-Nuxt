@@ -12,6 +12,7 @@ const hotelData = ref({});
 const mainData = ref([]);
 const headerData = ref({});
 const socialData = ref([]);
+const roomTypes = ref([]);
 const hotelId = ref(null);
 
 // Charger toutes les données depuis l'API
@@ -45,6 +46,11 @@ async function fetchData() {
     if (socialResult.length > 0) {
       socialData.value = socialResult; // Stocke tous les réseaux sociaux sous forme de tableau
     }
+
+    // Charger les types de chambre
+    const roomResponse = await fetch("http://127.0.0.1:8000/api/type/all");
+    const roomResult = await roomResponse.json();
+    roomTypes.value = roomResult;
 
     // 🔥 DEBUG : Affiche les données récupérées dans la console
     console.log("Données récupérées :", {
@@ -106,6 +112,63 @@ onMounted(fetchData);
               :url="`http://127.0.0.1:8000/api/main/update/${main.id}`"
           />
         </template>
+      </div>
+    </div>
+
+    <!-- 🔹 Modifier les Types de Chambre -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold mb-2 text-gold-500">Modifier les Types de Chambre</h2>
+      <div class="grid grid-cols-1 gap-6">
+        <div
+            v-for="type in roomTypes"
+            :key="type.id"
+            class="bg-white p-4 rounded shadow"
+        >
+          <UpdateField
+              label="Nom du type"
+              api-field="name"
+              :url="`http://127.0.0.1:8000/api/type/update/${type.id}`"
+              v-model="type.name"
+          />
+          <UpdateField
+              label="Description"
+              api-field="description"
+              :url="`http://127.0.0.1:8000/api/type/update/${type.id}`"
+              v-model="type.description"
+          />
+          <UpdateField
+              label="Prix"
+              api-field="price"
+              :url="`http://127.0.0.1:8000/api/type/update/${type.id}`"
+              v-model="type.price"
+          />
+
+          <!-- Affichage et mise à jour des 4 images du type -->
+          <div class="mt-4">
+            <h3 class="font-semibold mb-2">Modifier les images</h3>
+            <div class="grid grid-cols-2 gap-2">
+              <div
+                  v-for="(imgType, index) in type.image_types"
+                  :key="imgType.id"
+                  class="border p-2 rounded flex flex-col items-center"
+              >
+                <img
+                    :src="`http://127.0.0.1:8000/storage/${imgType.image}`"
+                    alt="Image chambre"
+                    class="w-[200px] h-[200px] object-cover rounded mb-2"
+                />
+                <UpdateField
+                    label="Modifier cette image"
+                    api-field="image"
+                    type="file"
+                    :url="`http://127.0.0.1:8000/api/type/updateImage/${imgType.id}`"
+                />
+              </div>
+            </div>
+          </div>
+
+
+        </div>
       </div>
     </div>
 

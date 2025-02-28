@@ -7,6 +7,8 @@ use App\Models\Hotel;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Image_Type;
 
 class TypeController extends Controller
 {
@@ -131,6 +133,32 @@ class TypeController extends Controller
         ], 201);
     }
 
+
+    // Méthode ajouter pour update les images une par une. Eric
+    public function updateTypeImage(Request $request, int $imageId): \Illuminate\Http\JsonResponse
+    {
+        // Valider que le fichier est bien présent et correct
+        $validatedData = $request->validate([
+            'image' => 'required|file|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'
+        ]);
+
+        // Trouver l'image à mettre à jour
+        $imageType = Image_Type::findOrFail($imageId);
+
+        // Traiter le nouvel upload
+        $image = $request->file('image');
+        $imageName = Str::random(10) . '.' . $image->getClientOriginalExtension();
+        $path = $image->storeAs('typeRoom', $imageName, 'public');
+
+        // Mettre à jour l'image dans la base de données
+        $imageType->image = $path;
+        $imageType->save();
+
+        return response()->json([
+            'message' => 'Image updated successfully!',
+            'image_url' => asset('storage/' . $path)
+        ], 200);
+    }
 
 
 
