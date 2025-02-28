@@ -18,11 +18,11 @@
 
         <div class="form-control">
             <input type="text" name="firstName" id="firstName" required>
-            <label for="firstName"> Prenom </label>
+            <label for="firstName"> Prénom </label>
         </div>
 
         <div class="form-control">
-            <input type="number" name="phone" id="phone" required>
+            <input type="text" name="phone" id="phone" required>
             <label for="phone"> Telephone </label>
         </div>
 
