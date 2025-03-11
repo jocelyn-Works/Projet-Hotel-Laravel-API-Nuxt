@@ -102,8 +102,9 @@ const registerUser = async () => {
     body: user.value
   });
 
+  // conexion apres inscription
   if (data.value && data.value.status === 'success') {
-    // Appeler l'API de connexion pour connecter l'utilisateur
+    
     const { data: loginData, error: loginError } = await useFetch(`${apiUrl}/connexion/login`, {
       method: 'POST',
       body: {
@@ -134,7 +135,6 @@ const registerUser = async () => {
   }
 
   if (error.value) {
-    // Gérer les erreurs ici
     errorMessage.value = 'Une erreur est survenue lors de l\'inscription. Veuillez réessayer.';
   }
 };
