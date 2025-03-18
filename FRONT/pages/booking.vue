@@ -49,7 +49,8 @@ async function verifierDisponibilite() {
   // Simule des chambres disponibles pour tester l'affichage
   chambresDispo.value = [
     { id: 1, type: 'Chambre Standard', prix: 100, image: 'https://via.placeholder.com/600x400' },
-    { id: 2, type: 'Suite Luxe', prix: 250, image: 'https://via.placeholder.com/600x400' }
+    { id: 2, type: 'Chambre Luxe', prix: 250, image: 'https://via.placeholder.com/600x400' },
+    { id: 3, type: 'Suite', prix: 500, image: 'https://via.placeholder.com/600x400' }
   ];
 
   loading.value = false; // Arrêter le chargement

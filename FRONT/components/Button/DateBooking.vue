@@ -1,33 +1,40 @@
 <script setup lang="ts">
-import { CalendarDate, DateFormatter, getLocalTimeZone } from '@internationalized/date'
+import { CalendarDate, DateFormatter, getLocalTimeZone } from '@internationalized/date';
 import { useUiStore } from '~/stores/ui';
+import { useDatesStore } from '~/stores/dates'; // Import du store Pinia
+import { computed } from 'vue';
 
 const df = new DateFormatter('en-US', {
   dateStyle: 'medium'
-})
+});
 
-const modelValue = shallowRef({
-  start: new CalendarDate(2025, 1, 20),
-  end: new CalendarDate(2025, 2, 10)
-})
-
-
-
+// Store des dates sélectionnées
+const datesStore = useDatesStore();
 const uiStore = useUiStore();
+
 const openDates = () => {
   uiStore.setActiveComponent('dates');
 };
 
+// Transformer les dates stockées en CalendarDate pour affichage
+const modelValue = computed(() => {
+  if (datesStore.selectedDates.start && datesStore.selectedDates.end) {
+    return {
+      start: new CalendarDate(...datesStore.selectedDates.start.split('-').map(Number)), // Convertir YYYY-MM-DD en CalendarDate
+      end: new CalendarDate(...datesStore.selectedDates.end.split('-').map(Number))
+    };
+  }
+  return { start: null, end: null };
+});
 </script>
 
 <template>
-  <UPopover  class="border border-black rounded-md w-1/5">
+  <UPopover class="border border-black rounded-md w-1/5">
     <UButton @click="openDates" color="neutral" variant="subtle" icon="i-lucide-calendar">
       <template v-if="modelValue.start">
         <template v-if="modelValue.end">
           {{ df.format(modelValue.start.toDate(getLocalTimeZone())) }} - {{ df.format(modelValue.end.toDate(getLocalTimeZone())) }}
         </template>
-
         <template v-else>
           {{ df.format(modelValue.start.toDate(getLocalTimeZone())) }}
         </template>
@@ -36,9 +43,5 @@ const openDates = () => {
         Pick a date
       </template>
     </UButton>
-
-    <template #content>
-      <UCalendar v-model="modelValue" class="p-2" :number-of-months="2" range />
-    </template>
   </UPopover>
 </template>
