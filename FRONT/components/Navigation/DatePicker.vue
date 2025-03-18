@@ -77,7 +77,7 @@ async function verifierDisponibilite() {
   errorMessage.value = "Vérification des disponibilités en cours (console pour voir les dates)";
 
   // l'appel à l'API
-  // router.push('/booking');  // Décommente cette ligne quand l'API est prête
+   router.push('/booking');  // Décommente cette ligne quand l'API est prête
 }
 
 // nb de personnes
