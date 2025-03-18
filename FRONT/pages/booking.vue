@@ -16,30 +16,43 @@ const loading = ref(true); // Gestion du chargement
 // Vérification et récupération des chambres disponibles
 async function verifierDisponibilite() {
   if (!datesStore.selectedDates.start || !datesStore.selectedDates.end) {
+    console.warn("⚠️ Aucune date sélectionnée, redirection vers l'accueil.");
     router.push('/'); // Redirection vers l'accueil si pas de dates
     return;
   }
 
-  try {
-    const response = await $fetch('/api/check-availability', {
-      method: 'POST',
-      body: {
-        dateDebut: datesStore.selectedDates.start,
-        dateFin: datesStore.selectedDates.end
-      }
-    });
+  // 🔍 Affichage des dates pour vérification
+  console.log("✅ Accès à /booking avec ces dates :", datesStore.selectedDates);
 
-    if (response.chambresDispo.length > 0) {
-      chambresDispo.value = response.chambresDispo; // Mise à jour des chambres disponibles
-    } else {
-      router.push({ path: '/', query: { error: 'Aucune chambre disponible' } }); // Redirection avec message d'erreur
-    }
-  } catch (error) {
-    console.error('Erreur API', error);
-    router.push({ path: '/', query: { error: 'Erreur lors de la vérification des disponibilités' } });
-  } finally {
-    loading.value = false;
-  }
+  // 🚨 Désactive temporairement l'appel API
+  // try {
+  //   const response = await $fetch('/api/check-availability', {
+  //     method: 'POST',
+  //     body: {
+  //       dateDebut: datesStore.selectedDates.start,
+  //       dateFin: datesStore.selectedDates.end
+  //     }
+  //   });
+
+  //   if (response.chambresDispo.length > 0) {
+  //     chambresDispo.value = response.chambresDispo;
+  //   } else {
+  //     router.push({ path: '/', query: { error: 'Aucune chambre disponible' } });
+  //   }
+  // } catch (error) {
+  //   console.error('Erreur API', error);
+  //   router.push({ path: '/', query: { error: 'Erreur lors de la vérification des disponibilités' } });
+  // } finally {
+  //   loading.value = false;
+  // }
+
+  // Simule des chambres disponibles pour tester l'affichage
+  chambresDispo.value = [
+    { id: 1, type: 'Chambre Standard', prix: 100, image: 'https://via.placeholder.com/600x400' },
+    { id: 2, type: 'Suite Luxe', prix: 250, image: 'https://via.placeholder.com/600x400' }
+  ];
+
+  loading.value = false; // Arrêter le chargement
 }
 
 // Appelle la fonction à l’arrivée sur la page
