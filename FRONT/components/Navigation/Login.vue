@@ -1,4 +1,5 @@
 <template>
+  <transition name="slide">
   <section class="fixed top-0 right-0 w-full md:w-2/5 bg-belgian-500 border border-dark-blue-500 rounded-bl-lg z-10">
     <div class="flex items-center w-full bg-dark-blue-500 p-4">
       <UIcon name="heroicons-solid:x-mark" class="w-6 h-6 text-white cursor-pointer" @click="closeLogin" />
@@ -40,6 +41,7 @@
 
     <ButtonSignup />
   </section>
+</transition>
 </template>
 
 <script setup>
@@ -65,9 +67,16 @@ const loginUser = async () => {
   if (data.value && data.value.status === 'success') {
     // Stocker le token d'authentification
     localStorage.setItem('authToken', data.value.data.token);
-    // Rediriger l'utilisateur vers une autre page si nécessaire
+    
     successMessage.value = 'Connecté !!';
-    // Par exemple : navigateTo('/dashboard');
+  
+    window.location.reload(); // actualise la page
+    // Fermer  après 5 secondes
+    setTimeout(() => {
+      setTimeout(() => {
+      closeLogin();
+    }, 3000);;
+    }, 5000);
   }
 
   if (error.value) {
