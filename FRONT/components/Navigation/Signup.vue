@@ -127,6 +127,12 @@ const registerUser = async () => {
         email: '',
         password: ''
       };
+
+      window.location.reload();
+    // Fermer le composant après 3 secondes
+    setTimeout(() => {
+      uiStore.closeComponent();
+    }, 4000);
       // Rediriger l'utilisateur vers une autre page si nécessaire
       // Par exemple : navigateTo('/dashboard');
     } else {
