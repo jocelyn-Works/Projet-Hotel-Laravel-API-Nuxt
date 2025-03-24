@@ -150,14 +150,14 @@ const decrementCount = () => {
         <p v-if="errorMessage" class="text-red-500 text-center font-bold mt-4 text-sm sm:text-base">{{ errorMessage }}</p>
 
         <div class="flex justify-center">
-          <UButton
+          <button
               @click="verifierDisponibilite"
-              class="bg-dark-blue-400 text-white text-lg sm:text-2xl px-3 sm:px-4 py-2"
+              class="bg-dark-blue-400 text-white rounded-full text-lg sm:text-2xl px-3 sm:px-4 py-2"
               variant="solid"
               size="md"
           >
             Confirmer la sélection
-          </UButton>
+          </button>
         </div>
       </div>
     </div>
