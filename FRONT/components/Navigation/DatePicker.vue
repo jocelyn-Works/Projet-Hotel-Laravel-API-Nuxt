@@ -152,9 +152,9 @@ const decrementCount = () => {
         <div class="flex justify-center">
           <button
               @click="verifierDisponibilite"
-              class="bg-dark-blue-400 text-white rounded-full text-lg sm:text-2xl px-3 sm:px-4 py-2"
-              variant="solid"
-              size="md"
+              class="bg-dark-blue-400 text-white rounded-full text-lg sm:text-2xl px-3 sm:px-4 py-2
+         transition-all duration-300 ease-in-out transform hover:bg-dark-blue-300 hover:-translate-y-1 hover:shadow-lg
+         active:translate-y-0 active:shadow-md"
           >
             Confirmer la sélection
           </button>
