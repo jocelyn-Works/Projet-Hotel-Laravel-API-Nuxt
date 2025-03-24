@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useUiStore } from '~/stores/ui';
-import { useDatesStore } from '~/stores/dates'; // Import du store des dates
+import { useDatesStore } from '~/stores/dates';
 import { useRouter } from 'vue-router';
 import { DatePicker as VCalendarDatePicker } from 'v-calendar';
 import { sub, format } from 'date-fns';
@@ -20,15 +20,34 @@ const selected = ref({
   end: new Date()
 });
 
-const errorMessage = ref(''); // Message d'erreur si aucune chambre n'est disponible
+const errorMessage = ref('');
 
 const attrs = {
   transparent: true,
   borderless: true,
   color: 'primary',
-  isDark: { selector: 'html', darkClass: 'dark' },
+  isDark: true,
   firstDayOfWeek: 2
 };
+
+// 🖥️ Détection de la taille de l'écran
+const calendarColumns = ref(1); // Par défaut, 1 mois (mobile)
+
+// Fonction pour mettre à jour `calendarColumns` selon la largeur de l'écran
+const updateCalendarColumns = () => {
+  calendarColumns.value = window.innerWidth >= 1024 ? 2 : 1; // 2 mois pour `md`, 1 mois sinon
+};
+
+// Ajouter un écouteur d'événement pour détecter le redimensionnement
+onMounted(() => {
+  updateCalendarColumns(); // Exécuter au montage
+  window.addEventListener('resize', updateCalendarColumns);
+});
+
+// Nettoyage de l'écouteur lors du démontage du composant
+onUnmounted(() => {
+  window.removeEventListener('resize', updateCalendarColumns);
+});
 
 const calendarAttributes = computed(() => [
   {
@@ -54,34 +73,27 @@ const calendarAttributes = computed(() => [
   }
 ]);
 
-// Vérifier les chambres disponibles et rediriger si dispo
 async function verifierDisponibilite() {
-  errorMessage.value = ''; // Réinitialisation du message d'erreur
+  errorMessage.value = '';
 
-  // Vérifie que l'utilisateur a bien sélectionné des dates
   if (!selected.value.start || !selected.value.end) {
     console.error("Aucune date sélectionnée !");
     return;
   }
 
-  // Stocker les dates dans Pinia (pour que `booking.vue` les récupère)
   datesStore.setDates(selected.value.start, selected.value.end);
 
-  // 🔍 Afficher les données envoyées dans la console
   console.log("🔹 Données enregistrées :", {
     dateDebut: datesStore.selectedDates.start,
     dateFin: datesStore.selectedDates.end
   });
 
-  // Temporairement, on affiche un message au lieu d'appeler l'API
   errorMessage.value = "Vérification des disponibilités en cours (console pour voir les dates)";
 
-  // l'appel à l'API
-   router.push('/booking');  // Décommente cette ligne quand l'API est prête
+  router.push('/booking');
 }
 
-// nb de personnes
-const count = ref(1); // Début à 1 personne par défaut
+const count = ref(1);
 
 const incrementCount = () => {
   count.value++;
@@ -95,16 +107,16 @@ const decrementCount = () => {
 </script>
 
 <template>
-  <section class="fixed top-0 right-0 w-full md:w-2/5 bg-belgian-500 border border-dark-blue-500 rounded-bl-lg z-10">
+  <section class="nav fixed top-0 right-0 w-full md:w-1/3 bg-belgian-500 border border-dark-blue-500 rounded-bl-lg z-10 dark:text-black">
     <div class="flex items-center w-full bg-dark-blue-500 p-4">
       <UIcon name="heroicons-solid:x-mark" class="w-6 h-6 text-white cursor-pointer" @click="closeDates" />
-      <h2 class="text-theme-500 text-4xl satisfy flex-grow text-center">Vos Dates</h2>
+      <h2 class="text-theme-500 text-2xl sm:text-3xl md:text-4xl satisfy flex-grow text-center">Vos Dates</h2>
     </div>
+
     <div class="w-full h-full p-4">
       <div class="p-4">
-        <!-- Bouton affichant les dates sélectionnées -->
         <div class="flex justify-center mb-4">
-          <UButton icon="i-heroicons-calendar-days-20-solid" class="uboutton">
+          <UButton icon="i-heroicons-calendar-days-20-solid" class="uboutton px-4 py-2 text-sm sm:text-base">
             {{ format(selected.start, 'd MMM, yyyy') }} - {{ format(selected.end, 'd MMM, yyyy') }}
           </UButton>
         </div>
@@ -113,7 +125,8 @@ const decrementCount = () => {
         <div class="flex justify-center bg-dark-blue-500 border border-dark-blue-500 rounded-lg">
           <VCalendarDatePicker
               v-model="selected"
-              :columns="2"
+              :columns="calendarColumns"
+              class="w-full sm:w-auto"
               v-bind="attrs"
               is-range
               :attributes="calendarAttributes"
@@ -121,28 +134,25 @@ const decrementCount = () => {
           />
         </div>
 
-        <!-- Sélection du nombre de personnes -->
-        <div class="flex justify-center items-center p-10 mt-2">
-          <div class="flex justify-evenly items-center w-full border border-dark-blue-500 rounded-2xl text-dark-blue-500 p-4 space-x-4">
-            <p class="text-xl font-bold">Nombre de Personnes</p>
-            <div class="flex justify-center items-center rounded-full bg-dark-blue-500 w-10 h-10">
-              <UIcon name="weui:add-filled" class="cursor-pointer bg-white w-8 h-8" @click="incrementCount" />
+        <div class="flex flex-col sm:flex-row justify-center items-center p-6 mt-2 space-y-4 sm:space-y-0 sm:space-x-4">
+          <p class="text-lg sm:text-xl font-bold text-dark-blue-500">Nombre de Personnes</p>
+          <div class="flex justify-evenly items-center w-full sm:w-auto border border-dark-blue-500 rounded-2xl text-dark-blue-500 p-4 space-x-4">
+            <div class="flex justify-center items-center rounded-full bg-dark-blue-500 w-8 h-8 sm:w-10 sm:h-10">
+              <UIcon name="weui:add-filled" class="cursor-pointer bg-white w-6 h-6 sm:w-8 sm:h-8" @click="incrementCount" />
             </div>
-            <span class="text-xl font-semibold">{{ count }}</span>
-            <div class="flex justify-center items-center rounded-full bg-dark-blue-500 w-10 h-10">
-              <UIcon name="ep:minus" class="cursor-pointer bg-white w-8 h-8" @click="decrementCount" />
+            <span class="text-lg sm:text-xl font-semibold">{{ count }}</span>
+            <div class="flex justify-center items-center rounded-full bg-dark-blue-500 w-8 h-8 sm:w-10 sm:h-10">
+              <UIcon name="ep:minus" class="cursor-pointer bg-white w-6 h-6 sm:w-8 sm:h-8" @click="decrementCount" />
             </div>
           </div>
         </div>
 
-        <!-- Affichage d'un message d'erreur -->
-        <p v-if="errorMessage" class="text-red-500 text-center font-bold mt-4">{{ errorMessage }}</p>
+        <p v-if="errorMessage" class="text-red-500 text-center font-bold mt-4 text-sm sm:text-base">{{ errorMessage }}</p>
 
-        <!-- Bouton de confirmation -->
         <div class="flex justify-center">
           <UButton
               @click="verifierDisponibilite"
-              class="bg-dark-blue-400 !text-white !text-2xl !px-4 !py-2"
+              class="bg-dark-blue-400 text-white text-lg sm:text-2xl px-3 sm:px-4 py-2"
               variant="solid"
               size="md"
           >
@@ -157,9 +167,14 @@ const decrementCount = () => {
 <style scoped>
 .uboutton {
   background-color: #F9F9F6;
+  color: black;
   border: 1px solid black;
 }
 .uboutton:hover {
   background-color: #F9F9F6;
+}
+
+.vc-title-wrapper {
+  color: white;
 }
 </style>
