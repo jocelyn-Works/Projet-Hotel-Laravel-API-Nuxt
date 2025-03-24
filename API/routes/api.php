@@ -4,8 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
-
+use App\Http\Controllers\AvailabilityController;
 
 
 // *************************************   HotelController    *******************************************************
@@ -117,3 +116,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::post('/check-availability', [AvailabilityController::class, 'check']);
