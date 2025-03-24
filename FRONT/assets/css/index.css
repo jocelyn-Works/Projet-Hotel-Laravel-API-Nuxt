@@ -13,13 +13,32 @@
 /*************   BODY  **************/
 
 li{
-  @apply m-4;
+  @apply m-4 hover:text-gold-300 hover:underline hover:italic;
 }
 
 
 
+/* Transition styles */
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.4s ease;
+}
 
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(100%);
+}
 
+.slide-enter-to,
+.slide-leave-from {
+  transform: translateX(0);
+}
+
+/****************   nav **************/
+
+.nav{
+  background: #faf7f2;
+}
 
 /************    button ************/
 
