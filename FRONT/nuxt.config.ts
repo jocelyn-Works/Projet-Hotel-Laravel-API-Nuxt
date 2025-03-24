@@ -5,7 +5,11 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/ui', 
     '@nuxtjs/google-fonts', 
-    '@pinia/nuxt'],
+    '@pinia/nuxt',
+    '@nuxtjs/color-mode'],
+  colorMode: {
+    classSuffix: '',
+  },
     build: {
       transpile: ['@pinia/nuxt'],
     },
@@ -14,6 +18,7 @@ export default defineNuxtConfig({
     
   ],
   tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css',
     configPath: 'tailwind.config.ts',
   },
   googleFonts: {
