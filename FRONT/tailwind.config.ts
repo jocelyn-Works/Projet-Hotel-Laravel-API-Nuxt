@@ -63,7 +63,7 @@ const config: Config = {
             }
         }
     },
-    darkMode: ['class', '[data-theme="dark"]'],
+    darkMode: 'class'
 };
 
 export default config;
