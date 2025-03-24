@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    protected $fillable = ['id', 'number', 'type_id', 'capacity',];
+    protected $fillable = ['number', 'type_id', 'quantity'];
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }
