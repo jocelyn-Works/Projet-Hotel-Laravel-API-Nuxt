@@ -86,3 +86,17 @@ VITE_APP_NAME="${APP_NAME}"
 
 > lancer le server
 >> php artisan serve
+
+## 🔄 Mise à jour du système de chambres
+
+>Pour réinitialiser et remplir la base de données :
+>> php artisan migrate:fresh --seed
+
+> Dans Postman, envoyer une requête POST vers :
+>>http://localhost:8000/api/check-availability
+
+> Avec un body comme :
+>>{
+"dateDebut": "2025-03-25",
+"dateFin": "2025-03-28"
+}

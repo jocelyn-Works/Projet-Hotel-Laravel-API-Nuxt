@@ -41,6 +41,9 @@ class AvailabilityController extends Controller
                     'description' => $type->description,
                     'price' => $type->price,
                     'disponibles' => $rooms->count(),
+                    'image_paths' => $type->imageTypes->pluck('image')->map(function($path) {
+                        return asset('storage/' . $path);
+                    }),
                 ];
             })->values();
 

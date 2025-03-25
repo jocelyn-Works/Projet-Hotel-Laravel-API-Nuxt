@@ -16,6 +16,7 @@ if (error.value) {
 }
 
 const hotel = computed(() => hotels.value ? hotels.value[0] : null);
+
 </script>
 
 <style scoped>

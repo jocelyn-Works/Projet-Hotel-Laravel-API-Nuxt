@@ -87,7 +87,8 @@ async function verifierDisponibilite() {
     dateFin: datesStore.selectedDates.end
   });
 
-  errorMessage.value = "Vérification des disponibilités en cours (console pour voir les dates)";
+  // Ferme la modal
+  uiStore.closeComponent();
 
   router.push('/booking');
 }
