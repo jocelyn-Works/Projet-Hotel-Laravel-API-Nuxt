@@ -71,7 +71,7 @@ watchEffect(() => {
 
   <Logo />
   <UContainer class="py-8 space-y-8">
-    <div class="text-center mb-8">
+    <div class="text-center mb-8 dark:text-black">
       <ButtonDateBooking />
     </div>
 
