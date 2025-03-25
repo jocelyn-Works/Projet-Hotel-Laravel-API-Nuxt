@@ -30,7 +30,7 @@
         </li>
       </ul>
     </div>
-    <AppFooter class="rounded-br-lg" />
+    <AppFooter class="rounded-br-[7px]" />
   </nav>
 </template>
 
