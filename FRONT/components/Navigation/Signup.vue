@@ -1,11 +1,11 @@
 <template>
   <section class="nav fixed top-0 right-0 w-full md:w-2/5 bg-belgian-500 border border-dark-blue-500 rounded-bl-lg z-10">
-    <div class="flex items-center w-full bg-dark-blue-500 p-4">
+    <div class="flex items-center w-full bg-dark-blue-500 p-3">
       <UIcon name="heroicons-solid:x-mark" class="w-6 h-6 text-white cursor-pointer" @click="closeSignup" />
       <h2 class="text-theme-500 text-4xl satisfy flex-grow text-center">Inscription</h2>
     </div>
 
-    <div class="flex justify-center w-full p-10">
+    <div class="flex justify-center w-full p-4">
       <form @submit.prevent="registerUser">
         <div class="form-control">
           <input type="text" name="name" id="name" v-model="user.last_name" required>
@@ -40,7 +40,7 @@
         <div class="flex justify-center">
           <UButton
             type="submit"
-            class="bg-dark-blue-400 !text-white !text-2xl !px-4 !py-2"
+            class="bg-dark-blue-400 !text-white !text-2xl !px-4 "
             variant="solid"
             size="md"
           >

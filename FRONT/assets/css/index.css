@@ -54,7 +54,7 @@ li{
 /**********  FORM ***********/
 
 .form-control {
-    @apply relative mb-10 w-[300px] text-dark-blue text-2xl;
+    @apply relative mt-1 mb-8 w-[300px] text-dark-blue text-2xl;
   }
   
   .form-control input {
