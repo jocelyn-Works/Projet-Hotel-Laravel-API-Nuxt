@@ -33,9 +33,8 @@ const attrs = {
 // 🖥️ Détection de la taille de l'écran
 const calendarColumns = ref(1); // Par défaut, 1 mois (mobile)
 
-// Fonction pour mettre à jour `calendarColumns` selon la largeur de l'écran
 const updateCalendarColumns = () => {
-  calendarColumns.value = window.innerWidth >= 1024 ? 2 : 1; // 2 mois pour `md`, 1 mois sinon
+  calendarColumns.value = window.innerWidth >= 1024 ? 2 : 1; // en dessous de 1024 affiché que 1 mois
 };
 
 // Ajouter un écouteur d'événement pour détecter le redimensionnement
