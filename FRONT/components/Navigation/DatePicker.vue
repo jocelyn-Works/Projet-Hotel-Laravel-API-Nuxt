@@ -67,17 +67,17 @@ async function verifierDisponibilite() {
   // Stocker les dates dans Pinia (pour que `booking.vue` les récupère)
   datesStore.setDates(selected.value.start, selected.value.end);
 
-  // 🔍 Afficher les données envoyées dans la console
+  // Afficher les données envoyées dans la console
   console.log("🔹 Données enregistrées :", {
     dateDebut: datesStore.selectedDates.start,
     dateFin: datesStore.selectedDates.end
   });
 
-  // Temporairement, on affiche un message au lieu d'appeler l'API
-  errorMessage.value = "Vérification des disponibilités en cours (console pour voir les dates)";
+  // Ferme la modal
+  uiStore.closeComponent();
 
   // l'appel à l'API
-   router.push('/booking');  // Décommente cette ligne quand l'API est prête
+   router.push('/booking');
 }
 
 // nb de personnes
@@ -135,8 +135,7 @@ const decrementCount = () => {
           </div>
         </div>
 
-        <!-- Affichage d'un message d'erreur -->
-        <p v-if="errorMessage" class="text-red-500 text-center font-bold mt-4">{{ errorMessage }}</p>
+
 
         <!-- Bouton de confirmation -->
         <div class="flex justify-center">
