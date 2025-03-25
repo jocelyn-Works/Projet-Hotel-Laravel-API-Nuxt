@@ -7,7 +7,7 @@
     </div>
 
     <!-- Superposition ponctuelle uniquement ici -->
-    <Logo class="absolute top-4 left-1/2 -translate-x-1/2 z-20"/>
+    <Logo class="absolute top-4 left-1/2 -translate-x-1/2 z-5"/>
     <ButtonDate />
 
     <!-- logo -->

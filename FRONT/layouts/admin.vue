@@ -45,7 +45,7 @@
     <div class="flex-1 flex flex-col">
       <!-- Header -->
       <header class="flex justify-center items-center pt-6 ml-64 relative">
-        <Logo class="absolute top-4 left-1/2 transform -translate-x-1/2 z-10" />
+        <Logo class="absolute top-4 left-1/2 transform -translate-x-1/2 z-50" />
       </header>
 
       <!-- Contenu dynamique -->
