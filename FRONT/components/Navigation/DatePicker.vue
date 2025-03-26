@@ -82,10 +82,6 @@ async function verifierDisponibilite() {
 
   datesStore.setDates(selected.value.start, selected.value.end);
 
-  console.log("🔹 Données enregistrées :", {
-    dateDebut: datesStore.selectedDates.start,
-    dateFin: datesStore.selectedDates.end
-  });
 
   // Ferme la modal
   uiStore.closeComponent();
@@ -125,11 +121,10 @@ const decrementCount = () => {
         <!-- Sélecteur de dates -->
         <div class="flex justify-center bg-dark-blue-500 border border-dark-blue-500 rounded-lg">
           <VCalendarDatePicker
-              v-model="selected"
+              v-model.range="selected"
               :columns="calendarColumns"
               class="w-full sm:w-auto"
               v-bind="attrs"
-              is-range
               :attributes="calendarAttributes"
               :min-date="new Date()"
           />

@@ -30,7 +30,7 @@ const modelValue = computed(() => {
 
 <template>
   <UPopover class="border border-black rounded-md w-1/5">
-    <UButton @click="openDates" color="neutral" variant="subtle" icon="i-lucide-calendar">
+    <UButton @click="openDates" color="gray" variant="ghost" icon="i-lucide-calendar">
       <template v-if="modelValue.start">
         <template v-if="modelValue.end">
           {{ df.format(modelValue.start.toDate(getLocalTimeZone())) }} - {{ df.format(modelValue.end.toDate(getLocalTimeZone())) }}
