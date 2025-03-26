@@ -15,7 +15,7 @@ const loading = ref(true);
 
 async function verifierDisponibilite() {
   if (!datesStore.selectedDates.start || !datesStore.selectedDates.end) {
-    console.warn("⚠️ Aucune date sélectionnée, redirection vers l'accueil.");
+    // console.warn("⚠️ Aucune date sélectionnée, redirection vers l'accueil.");
     router.push('/');
     return;
   }

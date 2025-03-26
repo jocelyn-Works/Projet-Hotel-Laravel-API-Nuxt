@@ -9,13 +9,13 @@
 import { computed } from 'vue';
 
 const apiUrl = import.meta.env.VITE_API_URL;
-const { data: hotels, error } = await useFetch(`${apiUrl}/hotel/all`);
-
-if (error.value) {
-  console.error('Erreur au chargement du logo :', error.value);
+const hotels = ref([]);
+try {
+  hotels.value = await $fetch(`${apiUrl}/hotel/all`);
+} catch (error) {
+  console.error("Erreur au chargement du logo :", error);
 }
-
-const hotel = computed(() => hotels.value ? hotels.value[0] : null);
+const hotel = computed(() => hotels.value.length ? hotels.value[0] : null);
 
 </script>
 
