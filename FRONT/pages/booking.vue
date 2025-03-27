@@ -1,17 +1,28 @@
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useUiStore } from '~/stores/ui';
 import { useDatesStore } from '~/stores/dates';
+import { useCartStore } from '~/stores/cart';
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue';
 
 const uiStore = useUiStore();
 const { activeComponent } = storeToRefs(uiStore);
 const datesStore = useDatesStore();
+const cartStore = useCartStore();
 const router = useRouter();
 
-const chambresDispo = ref([]);
+const chambresDispo = ref<Room[]>([]);
 const loading = ref(true);
+
+interface Room {
+  id: number;
+  name: string;
+  description?: string;
+  price: number;
+  disponibles: number;
+  image_paths?: string[];
+}
 
 async function verifierDisponibilite() {
   if (!datesStore.selectedDates.start || !datesStore.selectedDates.end) {
@@ -23,7 +34,7 @@ async function verifierDisponibilite() {
   console.log("✅ Accès à /booking avec ces dates :", datesStore.selectedDates);
 
   try {
-    const response = await $fetch('http://localhost:8000/api/check-availability', {
+    const response = await $fetch<{ typesDisponibles: Room[] }>('http://localhost:8000/api/check-availability', {
       method: 'POST',
       body: {
         dateDebut: datesStore.selectedDates.start,
@@ -43,6 +54,11 @@ async function verifierDisponibilite() {
     loading.value = false;
   }
 }
+
+const addToCart = (room: Room) => {
+  cartStore.addToCart(room);
+  console.log('Chambre ajoutée au panier :', room);
+};
 
 onMounted(() => {
   verifierDisponibilite();
@@ -92,8 +108,8 @@ onMounted(() => {
           <p class="text-gray-700 mb-2">{{ room.description || 'Aucune description disponible' }}</p>
           <p class="text-[#1d3557] font-bold mb-2">{{ room.price }} € / nuit</p>
           <p class="text-sm italic text-gray-500 mb-4">Disponibles : {{ room.disponibles }}</p>
-          <UButton variant="outline" color="primary">Options</UButton>
-          <UButton color="primary" class="ml-2">Sélectionner</UButton>
+
+          <UButton color="primary" class="ml-2" @click="addToCart(room)">Sélectionner</UButton>
         </div>
       </div>
     </div>
