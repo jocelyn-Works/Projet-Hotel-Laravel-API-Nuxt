@@ -4,16 +4,16 @@
       <p class="mx-4 text-2xl">Déconnexion</p>
     </button>
   </template>
-  
+
   <script setup lang="ts">
   import { useUserStore } from '~/stores/user';
   import { useFetch } from 'nuxt/app';
-  
+
   const userStore = useUserStore();
-  
+
   const logout = async () => {
     const apiUrl = import.meta.env.VITE_API_URL;
-  
+
     // Envoyer une requête POST à la route de déconnexion
     const { error } = await useFetch(`${apiUrl}/connexion/logout`, {
       method: 'POST',
@@ -21,7 +21,7 @@
         'Authorization': `Bearer ${userStore.token}`,
       },
     });
-  
+
     if (!error.value) {
       // Mettre à jour le store pour refléter la déconnexion
       userStore.logout();
