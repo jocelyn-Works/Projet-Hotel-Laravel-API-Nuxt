@@ -26,6 +26,9 @@
     <NavigationSignup v-if="activeComponent === 'signup'"  />
   </transition>
 
+  <transition name="slide">
+    <NavigationOption v-if="activeComponent === 'option'" />
+  </transition>
 
 </template>
 
