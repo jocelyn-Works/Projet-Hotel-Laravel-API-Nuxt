@@ -19,11 +19,11 @@ class AvailabilityController extends Controller
         $dateFin = $request->input('dateFin');
 
         $chambresReservees = Booking::where(function ($query) use ($dateDebut, $dateFin) {
-            $query->whereBetween('started_at', [$dateDebut, $dateFin])
-                ->orWhereBetween('ended_at', [$dateDebut, $dateFin])
+            $query->whereBetween('start_date', [$dateDebut, $dateFin])
+                ->orWhereBetween('end_date', [$dateDebut, $dateFin])
                 ->orWhere(function ($q) use ($dateDebut, $dateFin) {
-                    $q->where('started_at', '<=', $dateDebut)
-                        ->where('ended_at', '>=', $dateFin);
+                    $q->where('start_date', '<=', $dateDebut)
+                        ->where('end_date', '>=', $dateFin);
                 });
         })->pluck('room_id');
 

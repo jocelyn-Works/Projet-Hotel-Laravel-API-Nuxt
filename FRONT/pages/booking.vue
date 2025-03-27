@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { useUiStore } from '~/stores/ui';
 import { useDatesStore } from '~/stores/dates';
 import { useRouter } from 'vue-router';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 
 const uiStore = useUiStore();
 const { activeComponent } = storeToRefs(uiStore);
@@ -47,6 +47,16 @@ async function verifierDisponibilite() {
 onMounted(() => {
   verifierDisponibilite();
 });
+
+watch(
+    () => datesStore.selectedDates,
+    () => {
+      loading.value = true;
+      verifierDisponibilite();
+    },
+    { deep: true }
+);
+
 </script>
 
 <template>
