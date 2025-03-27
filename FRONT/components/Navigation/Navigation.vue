@@ -22,7 +22,9 @@
         <li>
           <NuxtLink to="/" >Accueil</NuxtLink>
         </li>
-        <li>Mes réservations</li>
+        <li>
+          <NuxtLink to="/my-bookings">Mes réservations</NuxtLink>
+        </li>
         <li>Chambres et suites</li>
         <li>Bars et Restaurants</li>
         <li v-if="user && user.is_admin" >

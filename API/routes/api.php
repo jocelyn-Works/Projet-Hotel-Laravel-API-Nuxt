@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AvailabilityController;
-
+use App\Http\Controllers\BookingController;
 
 // *************************************   HotelController    *******************************************************
 Route::prefix('hotel')->controller(\App\Http\Controllers\HotelController::class)->group(function () {
@@ -117,3 +117,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/check-availability', [AvailabilityController::class, 'check']);
+
+
+Route::middleware('auth:sanctum')->post('/bookings', [BookingController::class, 'store']);
+
+Route::middleware('auth:sanctum')->get('/user/bookings', [BookingController::class, 'userBookings']);

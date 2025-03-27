@@ -41,4 +41,5 @@ class Booking extends Model
     {
         return $this->belongsTo(Guest::class);
     }
+
 }
