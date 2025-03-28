@@ -7,7 +7,7 @@ import SocialUpdate from "@/components/dashboard/updatesSite/SocialUpdate.vue";
 import TypeUpdate from "@/components/dashboard/updatesSite/TypeUpdate.vue";
 
 definePageMeta({
-  layout: "admin"
+  layout: 'admin'
 });
 
 // Liste des sections avec leur label et composant associé

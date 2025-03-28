@@ -26,15 +26,13 @@
     <NavigationSignup v-if="activeComponent === 'signup'"  />
   </transition>
 
+  <transition name="slide">
+    <NavigationService v-if="activeComponent === 'service'" />
+  </transition>
 
 </template>
 
 <script setup>
-
-import { storeToRefs } from 'pinia';
-import { useUiStore } from '~/stores/ui';
-
-
 const uiStore = useUiStore();
 const { activeComponent } = storeToRefs(uiStore);
 </script>

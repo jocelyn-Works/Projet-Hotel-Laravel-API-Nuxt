@@ -117,3 +117,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/check-availability', [AvailabilityController::class, 'check']);
+
+
+
+Route::prefix('service')->controller(\App\Http\Controllers\ServiceController::class)->group(function () {
+    // affiche les service
+    Route::get('/show', 'showService')->name('showService');
+
+
+
+});
