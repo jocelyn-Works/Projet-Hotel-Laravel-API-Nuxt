@@ -10,31 +10,36 @@
     <!-- Footer -->
     <AppFooter />
 
-    <!-- Composants latéraux -->
-    <transition name="slide">
-      <Navigation v-if="activeComponent === 'navigation'" />
-    </transition>
+  <transition name="slide">
+    <Navigation v-if="activeComponent === 'navigation'" />
+  </transition>
 
-    <transition name="slide">
-      <NavigationLogin v-if="activeComponent === 'login'" />
-    </transition>
+  <transition name="slide">
+    <NavigationLogin v-if="activeComponent === 'login'" />
+  </transition>
 
-    <transition name="slide">
-      <NavigationDatePicker v-if="activeComponent === 'dates'" />
-    </transition>
+  <transition name="slide">
+    <NavigationDatePicker v-if="activeComponent === 'dates'"  />
+  </transition>
 
-    <transition name="slide">
-      <NavigationSignup v-if="activeComponent === 'signup'" />
-    </transition>
+  <transition name="slide">
+    <NavigationSignup v-if="activeComponent === 'signup'"  />
+  </transition>
 
+  <transition name="slide">
+    <NavigationService v-if="activeComponent === 'service'" />
+  </transition>
 
   </div>
 </template>
 
 <script setup>
+
 import { storeToRefs } from 'pinia';
 import { useUiStore } from '~/stores/ui';
+
 
 const uiStore = useUiStore();
 const { activeComponent } = storeToRefs(uiStore);
 </script>
+
