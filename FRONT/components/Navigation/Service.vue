@@ -5,7 +5,7 @@
       <h2 class="text-theme-500 text-4xl satisfy flex-grow text-center">Service</h2>
     </div>
 
-    <div class="flex flex-row flex-wrap w-full p-2">
+    <div class=" flex justify-center flex-row flex-wrap w-full p-2">
 
       <p v-if="serviceStore.loading">Chargement...</p>
       <p v-if="serviceStore.error" class="error">{{ serviceStore.error }}</p>
@@ -29,12 +29,12 @@
     </div>
 
     <div class="w-full flex justify-around items-center mt-4 p-4">
-      <button class="">
+      <UButton variant="outline" color="primary">
         vfv
-      </button>
-      <button class="">
+      </UButton>
+      <UButton  color="primary">
         fvfv
-      </button>
+      </UButton>
     </div>
 
   </section>
