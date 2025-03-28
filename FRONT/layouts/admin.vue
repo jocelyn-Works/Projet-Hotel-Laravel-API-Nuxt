@@ -57,5 +57,9 @@
 </template>
 
 <script setup>
-import Sidebar from '@/components/dashboard/Sidebar.vue';
+import Sidebar from '@/components/dashboard/Sidebar.vue'
+
+definePageMeta({
+  middleware: 'auth-admin'
+});
 </script>
