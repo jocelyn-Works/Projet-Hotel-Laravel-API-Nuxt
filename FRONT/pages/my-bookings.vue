@@ -36,10 +36,10 @@
 </template>
 
 <script setup>
-import { useUserStore } from '~/stores/user';
-import { onMounted, ref } from 'vue';
-import { format } from 'date-fns';
-import fr from 'date-fns/locale/fr';
+// import { useUserStore } from '~/stores/user';
+// import { onMounted, ref } from 'vue';
+// import { format } from 'date-fns';
+// import fr from 'date-fns/locale/fr';
 
 const bookings = ref([]);
 const loading = ref(true);

@@ -129,6 +129,6 @@ Route::prefix('service')->controller(\App\Http\Controllers\ServiceController::cl
 });
 
 
-Route::middleware('auth:sanctum')->post('/bookings', [BookingController::class, 'store']);
+Route::post('/bookings', [BookingController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user/bookings', [BookingController::class, 'userBookings']);
