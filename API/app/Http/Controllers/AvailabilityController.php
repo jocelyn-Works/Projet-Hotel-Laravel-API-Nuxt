@@ -44,6 +44,7 @@ class AvailabilityController extends Controller
                     'image_paths' => $type->imageTypes->pluck('image')->map(function($path) {
                         return asset('storage/' . $path);
                     }),
+                    'rooms' => $rooms->pluck('id'),
                 ];
             })->values();
 
