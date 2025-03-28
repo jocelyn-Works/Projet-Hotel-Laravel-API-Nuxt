@@ -4,6 +4,17 @@ import DashboardCard from '@/components/dashboard/DashboardCard.vue';
 definePageMeta({
   layout: 'admin'
 });
+
+//definePageMeta({
+  //middleware: async (to, from) => {
+    //const userStore = useUserStore();
+
+    // Vérifiez si l'utilisateur est un administrateur
+    //if (to.path === '/admin' && (!userStore.user || !userStore.user.is_admin)) {
+      //return navigateTo('/'); // Redirige vers la page d'accueil ou une page d'erreur
+   // }
+  //}
+//});
 </script>
 
 <template>
