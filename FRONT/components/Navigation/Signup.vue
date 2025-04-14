@@ -7,14 +7,15 @@
 
     <div class="flex justify-center w-full p-4">
       <form @submit.prevent="registerUser">
-        <div class="form-control">
-          <input type="text" name="name" id="name" v-model="user.last_name" required>
-          <label for="name"> Nom </label>
-        </div>
 
         <div class="form-control">
           <input type="text" name="firstName" id="firstName" v-model="user.first_name" required>
           <label for="firstName"> Prénom </label>
+        </div>
+
+        <div class="form-control">
+          <input type="text" name="lastnName" id="lastName" v-model="user.last_name" required>
+          <label for="name"> Nom </label>
         </div>
 
         <div class="form-control">
