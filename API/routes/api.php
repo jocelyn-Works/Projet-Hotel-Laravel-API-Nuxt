@@ -93,6 +93,7 @@ Route::prefix('type')->controller(\App\Http\Controllers\TypeController::class)->
 
     // Mettre à jour image par image ajouter par eric
     Route::post('/updateImage/{id}', 'updateTypeImage');
+
     // Supprime un type de chambre
     Route::delete('/delete/{id}', 'deleteType');
 
@@ -111,9 +112,31 @@ Route::prefix('connexion')->controller(\App\Http\Controllers\AuthController::cla
 
 });
 
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    // Tous les users avec leurs categories = /product
+    Route::get('/all', 'userShow');
+
+    // Recuperer un utilisateur par son id
+    Route::get('/{id}',  'userShowId');
+
+    // Modifier un utilisateur par son id
+    Route::post('/update/{id}', 'updateUser');
+
+    // crée un users
+    Route::post('/post',  'postUser');
+
+    // supprimer un user
+    Route::delete('/delete/{id}', 'deleteUser');
+
+});
+
+    // retourne utilisateurs connectés
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Route::middleware('auth:sanctum')->get('/user/profile', [UserController::class, 'profile']);
 
 
 Route::post('/check-availability', [AvailabilityController::class, 'check']);

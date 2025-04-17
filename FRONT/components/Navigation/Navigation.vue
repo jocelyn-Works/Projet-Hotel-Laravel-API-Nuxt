@@ -30,6 +30,9 @@
         <li v-if="user && user.is_admin" >
           <NuxtLink to="/admin" >Administration</NuxtLink>
         </li>
+        <li v-if="user">
+          <NuxtLink to="/profile">Profile</NuxtLink>
+        </li>
       </ul>
     </div>
     <AppFooter class="rounded-br-[7px]" />
