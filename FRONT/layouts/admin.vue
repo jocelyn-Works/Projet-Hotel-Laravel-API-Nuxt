@@ -37,18 +37,23 @@
 -->
 
 <template>
-  <div class="min-h-screen bg-[#F9F9F6]">
+
+  <div class="min-h-screen bg-[#F9F9F6] flex">
+  
     <!-- Sidebar -->
     <Sidebar class="w-64" />
 
     <!-- Contenu principal -->
     <div class="flex-1 flex flex-col">
       <!-- Header -->
-      <header class=" flex justify-center items-center pt-6 ml-64">
-        <img src="/logo.png" alt="Logo" class="max-h-24 w-auto">
+      <header class="flex justify-center items-center pt-6 ml-64 relative">
+        <Logo class="absolute top-4 left-1/2 transform -translate-x-1/2 z-50" />
       </header>
+
       <!-- Contenu dynamique -->
-      <main class="p-6 flex-1 ml-64">
+      <main class="p-6 flex-1 ml-64 mt-24"> <!-- Ajoute mt-24 (ou plus) ici -->
+      
+      
         <NuxtPage />
       </main>
     </div>
@@ -56,5 +61,10 @@
 </template>
 
 <script setup>
-import Sidebar from '@/components/dashboard/Sidebar.vue';
+
+import Sidebar from '@/components/dashboard/Sidebar.vue'
+
+definePageMeta({
+  middleware: 'auth-admin'
+});
 </script>

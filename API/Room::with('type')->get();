@@ -1,0 +1,15 @@
+[90m= [39m[
+    "[32mid[39m",
+    "[32mApp\Models\User[39m",
+    "[32mApp\Models\Guest[39m",
+    "[32mApp\Models\Room[39m",
+    "[32mstarted_at[39m",
+    "[32mended_at[39m",
+    "[32mquantity[39m",
+    "[32mpayment_method[39m",
+    "[32mpayment_status[39m",
+    "[32mstatus[39m",
+    "[32mcreated_at[39m",
+    "[32mupdated_at[39m",
+  ]
+

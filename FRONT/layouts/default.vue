@@ -1,10 +1,15 @@
 <template>
-  <ButtonAppMenu />
-  <main class="bg-theme-500">
 
-    <NuxtPage />
-  </main>
-  <AppFooter />
+  <div class="flex flex-col min-h-screen bg-theme-500">
+    <ButtonAppMenu />
+
+    <!-- Contenu principal -->
+    <main class="flex-1">
+      <NuxtPage />
+    </main>
+
+    <!-- Footer -->
+    <AppFooter />
 
   <transition name="slide">
     <Navigation v-if="activeComponent === 'navigation'" />
@@ -22,7 +27,11 @@
     <NavigationSignup v-if="activeComponent === 'signup'"  />
   </transition>
 
+  <transition name="slide">
+    <NavigationService v-if="activeComponent === 'service'" />
+  </transition>
 
+  </div>
 </template>
 
 <script setup>
@@ -34,4 +43,5 @@ import { useUiStore } from '~/stores/ui';
 const uiStore = useUiStore();
 const { activeComponent } = storeToRefs(uiStore);
 </script>
+
 

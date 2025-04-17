@@ -13,10 +13,13 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        return response()->json([
-            'users' => $users,
-        ]);
+
+        return response()->json(
+            $users,
+        );
     }
+
+
 
     public function userShowId($id): JsonResponse
     {
@@ -81,9 +84,9 @@ class UserController extends Controller
             'last_name' => 'sometimes|required|string',
             'email' => 'sometimes|required|string|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8',
-            'profile_image' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'phone' => 'required|string',
-            'address' => 'required|string',
+            'phone' => 'sometimes|string',
+            'address' => 'sometimes|string',
+
         ]);
 
         // Trouver l'utilisateur à mettre à jour
