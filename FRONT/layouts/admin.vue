@@ -37,7 +37,9 @@
 -->
 
 <template>
+
   <div class="min-h-screen bg-[#F9F9F6] flex">
+  
     <!-- Sidebar -->
     <Sidebar class="w-64" />
 
@@ -50,6 +52,8 @@
 
       <!-- Contenu dynamique -->
       <main class="p-6 flex-1 ml-64 mt-24"> <!-- Ajoute mt-24 (ou plus) ici -->
+      
+      
         <NuxtPage />
       </main>
     </div>
@@ -57,6 +61,7 @@
 </template>
 
 <script setup>
+
 import Sidebar from '@/components/dashboard/Sidebar.vue'
 
 definePageMeta({

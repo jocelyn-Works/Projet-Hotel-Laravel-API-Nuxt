@@ -25,13 +25,13 @@
       >
         Update
       </UButton>
+
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, watch } from "vue";
-
 
 const props = defineProps({
   label: String,
@@ -52,6 +52,22 @@ function updateValue(newValue) {
 }
 
 // Mise à jour automatique si la prop change
+
+  modelValue: String, // Donnée initiale venant de l'API
+});
+
+const emit = defineEmits(["update:modelValue"]); // 🔥 Ajoute l'événement pour modifier `hotelData`
+
+const value = ref(props.modelValue || "");
+
+// ✅ Met à jour la valeur locale et émet un événement au parent
+function updateValue(newValue) {
+  value.value = newValue;
+  emit("update:modelValue", newValue); // 🔥 Met à jour `hotelData` dans `update-website.vue`
+}
+
+// 🔄 Mise à jour auto si les données changent dans `update-website.vue`
+
 watch(() => props.modelValue, (newValue) => {
   value.value = newValue;
 });
@@ -65,12 +81,15 @@ async function updateData() {
   try {
     const formData = new FormData();
     formData.append(props.apiField, value.value);
-
     console.log("Envoi de la mise à jour à:", props.url);
     console.log("Données envoyées:", formData);
 
     const response = await fetch(props.url, {
       method: "POST",
+
+    const response = await fetch(props.url, {
+      method: "POST", // 🔥 Laravel attend POST, pas PUT !
+
       body: formData,
     });
 
@@ -82,3 +101,4 @@ async function updateData() {
   }
 }
 </script>
+

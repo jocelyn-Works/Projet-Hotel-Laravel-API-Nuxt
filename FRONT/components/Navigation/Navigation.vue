@@ -1,5 +1,4 @@
 <template>
-
   <nav class="nav fixed top-0 left-0 w-full md:w-2/5  border border-dark-blue-500 rounded-br-lg z-10">
     <div class="flex justify-between items-center bg-dark-blue-500 p-4">
       <div v-if="user">
@@ -52,15 +51,13 @@ onMounted(async () => {
 
 const user = computed(() => userStore.user);
 
-const closeNavigation = () => {
-  uiStore.closeComponent();
-};
 
 const logout = () => {
   userStore.logout();
   // Rediriger l'utilisateur vers la page de connexion ou d'accueil après la déconnexion
   // navigateTo('/login');
 };
+
 </script>
 
 <style scoped>
@@ -80,3 +77,4 @@ const logout = () => {
   transform: translateX(0);
 }
 </style>
+

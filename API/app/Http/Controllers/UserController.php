@@ -13,10 +13,12 @@ class UserController extends Controller
     {
         $users = User::all();
 
+
         return response()->json(
             $users,
         );
     }
+
 
 
     public function userShowId($id): JsonResponse
@@ -84,6 +86,7 @@ class UserController extends Controller
             'password' => 'nullable|string|min:8',
             'phone' => 'sometimes|string',
             'address' => 'sometimes|string',
+
         ]);
 
         // Trouver l'utilisateur à mettre à jour

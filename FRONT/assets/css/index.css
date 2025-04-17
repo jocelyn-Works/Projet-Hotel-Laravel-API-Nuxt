@@ -7,12 +7,14 @@
 }
 
 .tahoma{
+
   font-family: 'Tahoma', serif;
 }
 
 /*************   BODY  **************/
 
 li{
+
   @apply m-4 hover:text-gold-300 hover:underline hover:italic;
 }
 
@@ -38,22 +40,32 @@ li{
 
 .nav{
   background: #faf7f2;
+ 
 }
 
 /************    button ************/
 
 .btn-primary{
+
   @apply p-2 bg-dark-blue-500 rounded-lg w-full text-center text-2xl cursor-pointer;
 }
 
 .btn-primary:hover{
   @apply bg-gray-50 border border-dark-blue-500 hover:text-dark-blue-500
+
+  @apply p-2 bg-dark-blue-500 rounded-lg w-full;
+}
+
+.btn-primary:hover{
+  @apply bg-theme-500 border border-dark-blue-500 hover:text-dark-blue-500
+
 }
 
 
 /**********  FORM ***********/
 
 .form-control {
+
     @apply relative mt-1 mb-8 w-[300px] text-dark-blue text-2xl;
   }
   
