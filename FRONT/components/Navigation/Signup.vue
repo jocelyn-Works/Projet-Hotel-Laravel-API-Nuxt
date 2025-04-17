@@ -71,6 +71,7 @@ import { ref, onMounted } from 'vue';
 import { useUiStore } from '~/stores/ui';
 import { useFetch } from 'nuxt/app';
 
+
 onMounted(() => {
   const labels = document.querySelectorAll(".form-control label");
 
@@ -83,6 +84,7 @@ onMounted(() => {
       .join("");
   });
 });
+
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const uiStore = useUiStore();
@@ -146,6 +148,7 @@ const registerUser = async () => {
   }
 };
 
+
 const closeSignup = () => {
   uiStore.closeComponent();
 };
@@ -155,6 +158,3 @@ const openLogin = () => {
 };
 </script>
 
-<style scoped>
-
-</style>

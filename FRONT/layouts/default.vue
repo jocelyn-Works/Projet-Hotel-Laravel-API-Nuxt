@@ -1,4 +1,5 @@
 <template>
+
   <div class="flex flex-col min-h-screen bg-theme-500">
     <ButtonAppMenu />
 
@@ -42,4 +43,5 @@ import { useUiStore } from '~/stores/ui';
 const uiStore = useUiStore();
 const { activeComponent } = storeToRefs(uiStore);
 </script>
+
 

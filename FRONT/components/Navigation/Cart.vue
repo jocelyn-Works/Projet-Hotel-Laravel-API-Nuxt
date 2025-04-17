@@ -1,4 +1,5 @@
 <template>
+
   <section class="nav fixed top-0 right-0 w-full sm:w-4/5 md:w-3/5 lg:w-2/5 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl
       bg-belgian-500 border border-dark-blue-500 rounded-bl-lg z-10">
 
@@ -68,9 +69,14 @@ const uiStore = useUiStore();
 const cartStore = useCartStore();
 const { items: cartItems } = storeToRefs(cartStore);
 
+
+
+
+
 const closeCart = () => {
   uiStore.closeComponent();
 };
+
 
 const removeFromCart = (roomId: number) => {
   cartStore.removeFromCart(roomId);
@@ -82,6 +88,3 @@ const openService = () => {
 };
 </script>
 
-<style scoped>
-
-</style>

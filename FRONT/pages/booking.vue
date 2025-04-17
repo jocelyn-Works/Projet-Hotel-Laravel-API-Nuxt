@@ -78,9 +78,11 @@ watch(
 <template>
   <BookingAppCart />
 
+
   <transition name="slide">
     <NavigationCart v-if="activeComponent === 'cart'" />
   </transition>
+
 
   <Logo />
 
@@ -130,3 +132,6 @@ watch(
     </div>
   </UContainer>
 </template>
+
+  
+  

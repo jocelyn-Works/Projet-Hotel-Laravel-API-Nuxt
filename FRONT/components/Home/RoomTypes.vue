@@ -102,7 +102,10 @@ const openDates = () => {
             <p class="text-2xl font-semibold text-gold-500 mb-4">
               {{ selectedRoom.price }}€ <span class="text-base font-normal">/ nuit</span>
             </p>
+
             <button @click="openDates" class="bg-dark-blue-400 hover:bg-gold-500 text-white font-semibold py-2 px-4 rounded-md transition-colors">
+
+
               Réserver
             </button>
           </div>

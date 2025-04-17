@@ -1,4 +1,5 @@
 <script setup>
+
 import { ref } from "vue";
 import HotelUpdate from "@/components/dashboard/updatesSite/HotelUpdate.vue";
 import HeaderUpdate from "@/components/dashboard/updatesSite/HeaderUpdate.vue";
@@ -27,10 +28,12 @@ const currentComponent = ref(sections[0].component);
 function changeSection(comp) {
   currentComponent.value = comp;
 }
+
 </script>
 
 <template>
   <div>
+
     <!-- Menu de navigation fixe -->
     <div class=" text-white p-4 flex space-x-4 z-10">
       <UButton
@@ -51,4 +54,5 @@ function changeSection(comp) {
       <component :is="currentComponent" />
     </div>
   </div>
+
 </template>

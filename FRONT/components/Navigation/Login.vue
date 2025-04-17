@@ -1,4 +1,5 @@
 <template>
+
   <transition name="slide">
   <section class=" nav fixed top-0 right-0 w-full md:w-2/5 bg-belgian-500 border border-dark-blue-500 rounded-bl-lg z-10">
     <div class="flex items-center w-full bg-dark-blue-500 p-4">
@@ -84,6 +85,7 @@ const loginUser = async () => {
     errorMessage.value = 'Une erreur est survenue lors de la connexion. Veuillez réessayer.';
   }
 };
+   
 
 onMounted(() => {
   const labels = document.querySelectorAll(".form-control label");
@@ -98,11 +100,9 @@ onMounted(() => {
   });
 });
 
+
 const closeLogin = () => {
   uiStore.closeComponent();
 };
 </script>
 
-<style scoped>
-
-</style>

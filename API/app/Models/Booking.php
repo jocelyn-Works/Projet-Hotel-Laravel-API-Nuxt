@@ -27,6 +27,7 @@ class Booking extends Model
         'area',
         ];
 
+
     public function room()
     {
         return $this->belongsTo(Room::class);

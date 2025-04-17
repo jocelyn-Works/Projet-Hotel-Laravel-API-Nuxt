@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\BookingController;
 
+
 // *************************************   HotelController    *******************************************************
 Route::prefix('hotel')->controller(\App\Http\Controllers\HotelController::class)->group(function () {
 
@@ -39,8 +40,11 @@ Route::prefix('header')->controller(\App\Http\Controllers\HeaderController::clas
 
     // suprimer header
     Route::delete('/delete/{id}', 'deleteHeader');
+});
 
-});//******************
+
+
+
 
 //********************************************  MainController   *******************************************************************
 Route::prefix('main')->controller(\App\Http\Controllers\MainController::class)->group(function () {
@@ -79,6 +83,9 @@ Route::prefix('social')->controller(\App\Http\Controllers\SocialController::clas
 
 
 
+});
+
+
 
 //***************************************   typeController    **************************************************************
 Route::prefix('type')->controller(\App\Http\Controllers\TypeController::class)->group(function () {
@@ -98,6 +105,7 @@ Route::prefix('type')->controller(\App\Http\Controllers\TypeController::class)->
     Route::delete('/delete/{id}', 'deleteType');
 
 });
+
 
 Route::prefix('connexion')->controller(\App\Http\Controllers\AuthController::class)->group(function () {
     // Se créer un compte/Register
@@ -155,3 +163,12 @@ Route::prefix('service')->controller(\App\Http\Controllers\ServiceController::cl
 Route::post('/bookings', [BookingController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user/bookings', [BookingController::class, 'userBookings']);
+
+    // Supprime un type de chambre
+    Route::delete('/delete/{id}', 'deleteType');
+
+});
+
+
+
+
