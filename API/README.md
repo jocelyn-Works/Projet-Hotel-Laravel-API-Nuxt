@@ -1,13 +1,21 @@
+## ⚙️ Installation du projet
 
-## composer 
->composer install
+### 📦 Installer les dépendances PHP
+```bash
+composer install
+```
 
-## .env
-```javascript
+---
+
+### 📄 Configuration du fichier `.env`
+
+Copier et coller ce contenu dans un fichier `.env` à la racine du dossier `/API` :
+
+```dotenv
 APP_NAME=Laravel
 APP_ENV=local
-APP_KEY= 
-    APP_DEBUG=true
+APP_KEY=
+APP_DEBUG=true
 APP_TIMEZONE=UTC
 APP_URL=http://localhost:8000/
 
@@ -30,8 +38,8 @@ DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=Hotel
-DB_USERNAME= //
-DB_PASSWORD=  //
+DB_USERNAME= // Remplir
+DB_PASSWORD= // Remplir
 
 SESSION_DRIVER=database
 SESSION_LIFETIME=120
@@ -46,7 +54,7 @@ QUEUE_CONNECTION=database
 CACHE_STORE=database
 CACHE_PREFIX=
 
-    MEMCACHED_HOST=127.0.0.1
+MEMCACHED_HOST=127.0.0.1
 
 REDIS_CLIENT=phpredis
 REDIS_HOST=127.0.0.1
@@ -63,44 +71,49 @@ MAIL_FROM_ADDRESS="hello@example.com"
 MAIL_FROM_NAME="${APP_NAME}"
 
 AWS_ACCESS_KEY_ID=
-    AWS_SECRET_ACCESS_KEY=
-        AWS_DEFAULT_REGION=us-east-1
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
 AWS_BUCKET=
-    AWS_USE_PATH_STYLE_ENDPOINT=false
+AWS_USE_PATH_STYLE_ENDPOINT=false
 
 VITE_APP_NAME="${APP_NAME}"
-
 ```
 
-## crée le .env copier coler au dessus
+---
 
->faire : php artisan key:generate
->>remplire : DB_USERNAME=
->>DB_PASSWORD=
+## 🚀 Lancer le projet
 
-> migration pour la bdd
->> php artisan migrate
+```bash
+php artisan key:generate
+```
 
-> rafraichir la migration
->> php artisan migrate:refresh
+Remplir dans `.env` :
+- `DB_USERNAME=`
+- `DB_PASSWORD=`
 
-> lancer le server
->> php artisan serve
+### 🛠️ Migration pour la base de données
 
-## 🔄 Mise à jour du système de chambres
+```bash
+php artisan migrate
+```
 
->Pour réinitialiser et remplir la base de données :
->> php artisan migrate:fresh --seed
+### 🔁 Rafraîchir la base
 
-> Dans Postman, envoyer une requête POST vers :
->>http://localhost:8000/api/check-availability
+```bash
+php artisan migrate:refresh
+```
 
-> Avec un body comme :
->>{
-"dateDebut": "2025-03-25",
-"dateFin": "2025-03-28"
-}
+### 🧪 Recréer la base avec données de test
 
+```bash
+php artisan migrate:fresh --seed
+```
+
+### 🌍 Démarrer le serveur Laravel
+
+```bash
+php artisan serve
+```
 
 ---
 
@@ -126,3 +139,19 @@ http://localhost:8000/api/documentation
 💡 Astuce : si la documentation n’apparaît pas, vérifie que les annotations `@OA` sont bien présentes dans les controllers.
 
 ---
+
+## 📆 Exemple de vérification de disponibilité
+
+> Dans Postman, envoyer une requête **POST** vers :
+
+```
+http://localhost:8000/api/check-availability
+```
+
+Avec un body :
+```json
+{
+  "dateDebut": "2025-03-25",
+  "dateFin": "2025-03-28"
+}
+```
