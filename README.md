@@ -1,6 +1,13 @@
 # Projet-Hotel-Laravel-API-Nuxt
 
-
+![capture d'ecran |500px](./img/1.png)
+![capture d'ecran |500px](./img/2.png)
+![capture d'ecran |500px](./img/3.png)
+![capture d'ecran |500px](./img/5.png)
+![capture d'ecran |500px](./img/4.png)
+![capture d'ecran |500px](./img/6.png)
+![capture d'ecran |500px](./img/7.png)
+![capture d'ecran |500px](./img/8.png)
 
 >- __serveur :__
 >>```javascript
