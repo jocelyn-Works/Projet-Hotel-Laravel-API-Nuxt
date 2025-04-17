@@ -1,0 +1,201 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Hotel",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/hotel/all": {
+            "get": {
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Afficher les informations de l'hôtel",
+                "description": "Afficher les infos de l'hôtel",
+                "operationId": "5720fd2ca5f642bee27c1b0c2c2fcfe9",
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                }
+            }
+        },
+        "/api/hotel/new": {
+            "post": {
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Créer un nouvel hôtel",
+                "description": "Créer un nouvel hôtel",
+                "operationId": "30286a1ff9b66cf0929d6c644e920125",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "street",
+                                    "city",
+                                    "phone_number",
+                                    "email",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Hôtel Artichaut"
+                                    },
+                                    "street": {
+                                        "type": "string",
+                                        "example": "14 rue de la Paix"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Paris"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "0123456789"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "contact@hotel.fr"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Hôtel créé avec succès"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/api/hotel/update/{id}": {
+            "post": {
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Met à jour un hôtel existant",
+                "description": "Mettre à jour un hôtel existant",
+                "operationId": "ce04f22b41577c5e1d0b0bed276ced91",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'hôtel à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nouveau nom de l'hôtel"
+                                    },
+                                    "street": {
+                                        "type": "string",
+                                        "example": "Nouvelle rue"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Nouvelle ville"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "0612345678"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "nouveau@hotel.fr"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Hôtel mis à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Hôtel non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/hotel/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Supprimer un hôtel",
+                "description": "Supprimer un hôtel",
+                "operationId": "863158cd717e2958ef6140d46309c15d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'hôtel à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hôtel supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Hôtel non trouvé"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Hotel",
+            "description": "Hotel"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "sanctum": []
+        }
+    ]
+}

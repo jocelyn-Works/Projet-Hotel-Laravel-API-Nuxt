@@ -100,3 +100,29 @@ VITE_APP_NAME="${APP_NAME}"
 "dateDebut": "2025-03-25",
 "dateFin": "2025-03-28"
 }
+
+
+---
+
+## 📚 Documentation API avec Swagger
+
+### ✅ Étapes d'installation sur ton poste
+
+1. Installe L5 Swagger (si pas déjà fait) :
+```bash
+composer require "darkaonline/l5-swagger"
+```
+
+2. Génère la documentation :
+```bash
+php artisan l5-swagger:generate
+```
+
+3. Accède à la documentation dans ton navigateur :
+```
+http://localhost:8000/api/documentation
+```
+
+💡 Astuce : si la documentation n’apparaît pas, vérifie que les annotations `@OA` sont bien présentes dans les controllers.
+
+---

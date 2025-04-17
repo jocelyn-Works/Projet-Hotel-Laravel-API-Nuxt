@@ -55,7 +55,6 @@ class BookingController extends Controller
             'booking' => $booking
         ]);
     }
-
     public function userBookings(Request $request)
     {
         $user = $request->user(); // récupère l'utilisateur connecté
