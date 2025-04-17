@@ -2,7 +2,8 @@
 import { ref } from 'vue';
 
 // Récupération de l'URL de l'API depuis les variables d'environnement
-const apiUrl = import.meta.env.VITE_API_URL;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 
 // Interface décrivant la structure des types de chambre
 interface RoomType {
@@ -102,7 +103,10 @@ const openDates = () => {
             <p class="text-2xl font-semibold text-gold-500 mb-4">
               {{ selectedRoom.price }}€ <span class="text-base font-normal">/ nuit</span>
             </p>
+
             <button @click="openDates" class="bg-dark-blue-400 hover:bg-gold-500 text-white font-semibold py-2 px-4 rounded-md transition-colors">
+
+
               Réserver
             </button>
           </div>

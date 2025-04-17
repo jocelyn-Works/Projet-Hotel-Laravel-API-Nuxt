@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-const apiUrl = import.meta.env.VITE_API_URL;
+
 
 
 interface UserState {
@@ -16,7 +16,8 @@ export const useUserStore = defineStore('user', {
   actions: {
     async fetchUser() {
       if (!this.token) return;
-
+      const config = useRuntimeConfig();
+      const apiUrl = config.public.apiUrl;
 
       const { data, error } = await useFetch(`${apiUrl}/user`, {
         headers: {

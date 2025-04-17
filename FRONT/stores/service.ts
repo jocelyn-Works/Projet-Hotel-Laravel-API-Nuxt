@@ -7,7 +7,7 @@ interface Service {
     description?: string;
 }
 
-const apiUrl = import.meta.env.VITE_API_URL;
+
 export const useServiceStore = defineStore('service', () => {
     const services = ref<Service[]>([]);
     const loading = ref(false);
