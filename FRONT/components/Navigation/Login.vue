@@ -49,7 +49,9 @@ import { ref, onMounted } from 'vue';
 import { useUiStore } from '~/stores/ui';
 import { useFetch } from 'nuxt/app';
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
+
 const uiStore = useUiStore();
 const user = ref({
   email: '',

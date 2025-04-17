@@ -84,7 +84,8 @@ onMounted(() => {
   });
 });
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 const uiStore = useUiStore();
 const user = ref({
   last_name: '',

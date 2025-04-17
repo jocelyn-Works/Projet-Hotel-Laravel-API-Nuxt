@@ -8,7 +8,9 @@
 <script setup>
 import { computed } from 'vue';
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
+
 const hotels = ref([]);
 try {
   hotels.value = await $fetch(`${apiUrl}/hotel/all`);
