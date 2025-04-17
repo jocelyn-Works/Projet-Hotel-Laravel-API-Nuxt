@@ -5,6 +5,7 @@ import HeaderUpdate from "@/components/dashboard/updatesSite/HeaderUpdate.vue";
 import MainUpdate from "@/components/dashboard/updatesSite/MainUpdate.vue";
 import SocialUpdate from "@/components/dashboard/updatesSite/SocialUpdate.vue";
 import TypeUpdate from "@/components/dashboard/updatesSite/TypeUpdate.vue";
+import UserUpdate from "~/components/dashboard/updatesSite/UserUpdate.vue";
 
 definePageMeta({
   layout: 'admin'
@@ -16,7 +17,8 @@ const sections = [
   { label: "Header", component: HeaderUpdate },
   { label: "Main", component: MainUpdate },
   { label: "Types", component: TypeUpdate },
-  { label: "Social", component: SocialUpdate }
+  { label: "Social", component: SocialUpdate },
+  { label: "User", component: UserUpdate }
 ];
 
 // Composant actuellement affiché (par défaut, le premier)

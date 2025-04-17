@@ -38,7 +38,7 @@ const props = defineProps({
   apiField: String,
   type: { type: String, default: "text" },
   url: String,
-  modelValue: String, // Donnée initiale venant de l'API
+  modelValue: [String, File], // Donnée initiale venant de l'API
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -65,6 +65,9 @@ async function updateData() {
   try {
     const formData = new FormData();
     formData.append(props.apiField, value.value);
+
+    console.log("Envoi de la mise à jour à:", props.url);
+    console.log("Données envoyées:", formData);
 
     const response = await fetch(props.url, {
       method: "POST",
