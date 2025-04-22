@@ -2,8 +2,11 @@
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiUrl;
 
-const { data, error } = await useFetch(`${apiUrl}/main/all`
-);
+const { data, error } = await useFetch(`${apiUrl}/main/all`, {
+  server: false,
+});
+
+
 
 // console.log("Données reçues :", data.value);
 </script>

@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-// Récupération de l'URL de l'API depuis les variables d'environnement
-const config = useRuntimeConfig();
-const apiUrl = config.public.apiUrl;
+import { ref, watchEffect } from 'vue';
 
 // Interface décrivant la structure des types de chambre
 interface RoomType {
@@ -14,37 +10,41 @@ interface RoomType {
   image_paths: string[];
 }
 
-// Variables réactives pour stocker les données récupérées
+// Récupération de l'URL de l'API depuis les variables d'environnement
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
+
+// Données réactives
 const roomTypes = ref<RoomType[]>([]);
 const selectedRoom = ref<RoomType | null>(null);
 
-// Fonction pour récupérer tous les types de chambres depuis l'API
-const { data, error } = await useAsyncData<RoomType[]>("roomTypes", () =>
-    $fetch(`${apiUrl}/type/all`)
-);
+// Appel API pour récupérer les types de chambres (côté client uniquement)
+const { data, error } = await useFetch<RoomType[]>(`${apiUrl}/type/all`, {
+  server: false, // Exécution uniquement côté client
+});
 
-// Gestion des erreurs de récupération des données
-if (error.value) {
-  console.error("Erreur lors de la récupération des types de chambres :", error.value);
-}
-
-// Si des données sont récupérées avec succès
-if (data.value) {
-  roomTypes.value = data.value;
-
-  // Sélection automatique de la première chambre disponible
-  if (roomTypes.value.length > 0) {
-    selectedRoom.value = roomTypes.value[0];
+// Mise à jour des données après récupération
+watchEffect(() => {
+  if (error.value) {
+    console.error("Erreur lors de la récupération des types de chambres :", error.value);
   }
-}
+
+  if (data.value) {
+    roomTypes.value = data.value;
+
+    // Sélection automatique de la première chambre
+    if (roomTypes.value.length > 0) {
+      selectedRoom.value = roomTypes.value[0];
+    }
+  }
+});
 
 // Fonction pour sélectionner une chambre au clic
 const selectRoom = (room: RoomType) => {
   selectedRoom.value = room;
 };
 
-
-
+// Interaction avec le store UI
 const uiStore = useUiStore();
 
 const openDates = () => {

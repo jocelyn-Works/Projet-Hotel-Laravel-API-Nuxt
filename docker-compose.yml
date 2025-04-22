@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: ./API
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development

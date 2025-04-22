@@ -28,8 +28,6 @@
       </p>
     </div>
   </header>
-  
-
 </template>
 
 <script setup>
@@ -37,7 +35,9 @@ const config = useRuntimeConfig();
 const apiUrl = config.public.apiUrl;
 
 // header
-const { data: dataHeader } = await useFetch(`${apiUrl}/header/all`);
+const { data: dataHeader } = await useFetch(`${apiUrl}/header/all`, {
+  server: false, // Ne s’exécute que côté client
+});
 
 // // hôtel
 // const { data: dataHotel } = await useFetch(`${apiUrl}/hotel/all`);
