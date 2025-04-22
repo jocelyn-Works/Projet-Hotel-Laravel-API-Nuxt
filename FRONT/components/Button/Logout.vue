@@ -12,7 +12,8 @@
   const userStore = useUserStore();
 
   const logout = async () => {
-    const apiUrl = import.meta.env.VITE_API_URL;
+    const config = useRuntimeConfig();
+    const apiUrl = config.public.apiUrl;
 
     // Envoyer une requête POST à la route de déconnexion
     const { error } = await useFetch(`${apiUrl}/connexion/logout`, {

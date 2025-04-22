@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-// Récupération de l'URL de l'API depuis les variables d'environnement
-const apiUrl = import.meta.env.VITE_API_URL;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 
 // Interface décrivant la structure des types de chambre
 interface RoomType {

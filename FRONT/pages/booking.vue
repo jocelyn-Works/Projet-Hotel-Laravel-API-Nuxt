@@ -11,6 +11,8 @@ const { activeComponent } = storeToRefs(uiStore);
 const datesStore = useDatesStore();
 const cartStore = useCartStore();
 const router = useRouter();
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 
 const chambresDispo = ref<Room[]>([]);
 const loading = ref(true);
@@ -26,15 +28,14 @@ interface Room {
 
 async function verifierDisponibilite() {
   if (!datesStore.selectedDates.start || !datesStore.selectedDates.end) {
-    // console.warn("⚠️ Aucune date sélectionnée, redirection vers l'accueil.");
     router.push('/');
     return;
   }
 
-  console.log("✅ Accès à /booking avec ces dates :", datesStore.selectedDates);
+  console.log("Accès à /booking avec ces dates :", datesStore.selectedDates);
 
   try {
-    const response = await $fetch<{ typesDisponibles: Room[] }>('http://localhost:8000/api/check-availability', {
+    const response = await $fetch<{ typesDisponibles: Room[] }>(`${apiUrl}/check-availability`, {
       method: 'POST',
       body: {
         dateDebut: datesStore.selectedDates.start,

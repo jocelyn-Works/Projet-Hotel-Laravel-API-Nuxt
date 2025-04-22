@@ -1,5 +1,6 @@
 <script setup>
-const apiUrl = import.meta.env.VITE_API_URL;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 const { data, error } = await useFetch(`${apiUrl}/main/all`
 );
 

@@ -1,6 +1,6 @@
 <!--
 ===================================================
-💡 Guide pour ajouter une nouvelle page au dashboard
+Guide pour ajouter une nouvelle page au dashboard
 ===================================================
 
 1️⃣ **Créer un nouveau fichier de page**
@@ -32,7 +32,7 @@
    - Recharge la page.
    - Le lien de la nouvelle page devrait apparaître dans la sidebar et être accessible.
 
-🚀 **C'est tout ! La nouvelle page est maintenant intégrée au dashboard !**
+**C'est tout ! La nouvelle page est maintenant intégrée au dashboard !**
 
 -->
 

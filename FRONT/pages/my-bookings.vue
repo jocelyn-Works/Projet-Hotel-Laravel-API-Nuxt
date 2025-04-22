@@ -36,14 +36,10 @@
 </template>
 
 <script setup>
-// import { useUserStore } from '~/stores/user';
-// import { onMounted, ref } from 'vue';
-// import { format } from 'date-fns';
-// import fr from 'date-fns/locale/fr';
-
 const bookings = ref([]);
 const loading = ref(true);
-const apiUrl = import.meta.env.VITE_API_URL;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 const userStore = useUserStore();
 
 // Formattage de date lisible (ex: 5 avril 2025)

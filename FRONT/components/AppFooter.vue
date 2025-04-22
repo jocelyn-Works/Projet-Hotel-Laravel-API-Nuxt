@@ -33,7 +33,8 @@
 </template>
 
 <script setup>
-const apiUrl = import.meta.env.VITE_API_URL;
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 
 // Hôtel
 const { data: dataHotel } = await useFetch(`${apiUrl}/hotel/all`);
