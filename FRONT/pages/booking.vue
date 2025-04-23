@@ -15,6 +15,9 @@ const router = useRouter();
 const chambresDispo = ref<Room[]>([]);
 const loading = ref(true);
 
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
+
 interface Room {
   id: number;
   name: string;
@@ -34,7 +37,7 @@ async function verifierDisponibilite() {
   console.log("✅ Accès à /booking avec ces dates :", datesStore.selectedDates);
 
   try {
-    const response = await $fetch<{ typesDisponibles: Room[] }>('http://localhost:8000/api/check-availability', {
+    const response = await $fetch<{ typesDisponibles: Room[] }>(`${apiUrl}/check-availability`, {
       method: 'POST',
       body: {
         dateDebut: datesStore.selectedDates.start,

@@ -1,22 +1,23 @@
-
-FROM node:18-alpine AS builder
+FROM node:20-slim AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
+RUN npm install
 
 COPY . .
 
-RUN npm install
+RUN npm run build
 
-FROM node:18-alpine
+FROM node:20-slim AS runner
 
 WORKDIR /app
 
-COPY --from=builder /app ./
+COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/package*.json ./
 
 RUN npm install --omit=dev
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+CMD ["node", ".output/server/index.mjs"]

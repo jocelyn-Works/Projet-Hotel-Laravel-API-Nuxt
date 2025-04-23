@@ -1,0 +1,36 @@
+stages:
+  - build
+  - push
+
+variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_VERIFY: "true"
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+    DOCKER_DRIVER: overlay2
+
+build-image:
+  stage: build
+  image: docker:24.0.5
+  services:
+    - docker:dind
+  script:
+    - echo "🔨 Build de l'image Docker..."
+    - docker build -t $IMAGE_TAG .
+  only:
+    - main
+    - master
+
+push-image:
+  stage: push
+  image: docker:24.0.5
+  services:
+    - docker:dind
+  script:
+    - echo "🔐 Connexion au Docker Registry..."
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - echo "📤 Push de l'image Docker..."
+    - docker push $IMAGE_TAG
+  only:
+    - main
+    - master

@@ -17,6 +17,9 @@ export const useServiceStore = defineStore('service', () => {
         loading.value = true;
         error.value = null;
 
+        const config = useRuntimeConfig();
+        const apiUrl = config.public.apiUrl;
+
         try {
             const { data, error: fetchError } = await useFetch<Service[]>(`${apiUrl}/service/show`);
 
