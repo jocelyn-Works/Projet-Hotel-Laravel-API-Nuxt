@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { storeToRefs } from 'pinia';
 import { useUiStore } from '~/stores/ui';
 import { useDatesStore } from '~/stores/dates';
@@ -86,33 +86,21 @@ watch(
   </transition>
 
   <Logo />
-
   <UContainer class="py-8 space-y-8">
     <div class="text-center mb-8 dark:text-black">
       <ButtonDateBooking />
     </div>
 
-    <!-- Chargement -->
+    <!-- Gestion du chargement -->
     <div v-if="loading" class="text-center">
       <p>Chargement des chambres...</p>
     </div>
 
-    <!-- Affichage des chambres disponibles -->
+    <!-- Affichage dynamique des chambres disponibles -->
     <div v-else-if="chambresDispo.length">
-      <div
-          v-for="room in chambresDispo"
-          :key="room.id"
-          class="bg-[#fdf8f1] p-6 rounded-lg shadow-lg flex flex-col lg:flex-row items-center"
-      >
-        <!-- Images (grille 2x2 comme dans RoomTypes.vue) -->
-        <div class="lg:w-1/2 grid grid-cols-2 gap-4">
-          <img
-              v-for="(img, index) in room.image_paths?.slice(0, 4)"
-              :key="index"
-              :src="img"
-              class="w-full h-48 object-cover rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
-              :alt="`Image ${index + 1} de ${room.name}`"
-          />
+      <div v-for="room in chambresDispo" :key="room.id" class="bg-[#fdf8f1] p-6 rounded-lg shadow-lg flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2">
+          <img :src="room.image" :alt="room.type" class="rounded-lg" />
         </div>
 
         <!-- Infos -->
@@ -127,7 +115,7 @@ watch(
       </div>
     </div>
 
-    <!-- Message si aucune chambre -->
+    <!-- Message si aucune chambre n'est trouvée -->
     <div v-else class="text-center text-red-500 font-bold">
       <p>Aucune chambre disponible pour ces dates.</p>
     </div>

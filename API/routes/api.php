@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\BookingController;
 
+
 // *************************************   HotelController    *******************************************************
 Route::prefix('hotel')->controller(\App\Http\Controllers\HotelController::class)->group(function () {
 
@@ -93,7 +94,6 @@ Route::prefix('type')->controller(\App\Http\Controllers\TypeController::class)->
 
     // Mettre à jour image par image ajouter par eric
     Route::post('/updateImage/{id}', 'updateTypeImage');
-
     // Supprime un type de chambre
     Route::delete('/delete/{id}', 'deleteType');
 
@@ -148,6 +148,7 @@ Route::prefix('service')->controller(\App\Http\Controllers\ServiceController::cl
     Route::get('/show', 'showService')->name('showService');
 
 
+Route::post('/check-availability', [AvailabilityController::class, 'check']);
 
 });
 
