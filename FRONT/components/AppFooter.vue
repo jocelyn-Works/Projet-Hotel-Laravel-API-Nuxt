@@ -35,13 +35,13 @@
 <script setup>
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiUrl;
-
+import { useApi } from '@/composables/useApi'
 // Hôtel
-const { data: dataHotel } = await useFetch(`${apiUrl}/hotel/all`);
+const { data: dataHotel } = await useApi('/hotel/all');
 
 // Année actuelle
 const currentYear = new Date().getFullYear();
 
 // Réseaux sociaux
-const { data: dataSocial } = await useFetch(`${apiUrl}/social/all`);
+const { data: dataSocial } = await useApi('/social/all');
 </script>

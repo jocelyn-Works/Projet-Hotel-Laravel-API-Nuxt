@@ -63,7 +63,7 @@ const statusColor = (status) => {
 // Chargement des réservations
 onMounted(async () => {
   try {
-    const response = await $fetch(`${apiUrl}/user/bookings`, {
+    const response = await $fetch(`${apiUrl}/api/user/bookings`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${userStore.token}`,

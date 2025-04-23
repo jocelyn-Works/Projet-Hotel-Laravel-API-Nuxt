@@ -1,23 +1,25 @@
-<!-- Logo.vue -->
 <template>
   <div v-if="hotel" class="logo-container flex justify-center">
     <img :src="hotel.image_url" alt="Hotel Logo" class="w-36 h-auto object-contain">
   </div>
 </template>
 
-<script setup>
-import { computed } from 'vue';
+<script setup lang="ts">
+import { computed, ref } from 'vue'
 
-const config = useRuntimeConfig();
-const apiUrl = config.public.apiUrl;
-const hotels = ref([]);
-try {
-  hotels.value = await $fetch(`${apiUrl}/hotel/all`);
-} catch (error) {
-  console.error("Erreur au chargement du logo :", error);
+// Appel de l'API via le helper global
+const { data, error } = await useApi<{ image_url: string }[]>('/hotel/all')
+
+// Stockage des hôtels retournés
+const hotels = ref(data.value || [])
+
+// Sélection du premier hôtel (s'il existe)
+const hotel = computed(() => hotels.value.length > 0 ? hotels.value[0] : null)
+
+// Gestion des erreurs (affichée en console seulement)
+if (error.value) {
+  console.error("Erreur au chargement du logo :", error.value)
 }
-const hotel = computed(() => hotels.value.length ? hotels.value[0] : null);
-
 </script>
 
 <style scoped>

@@ -35,9 +35,9 @@
 <script setup>
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiUrl;
-
+import { useApi } from '@/composables/useApi'
 // header
-const { data: dataHeader } = await useFetch(`${apiUrl}/header/all`);
+const { data: dataHeader } = await useApi('/header/all');
 
 // // hôtel
 // const { data: dataHotel } = await useFetch(`${apiUrl}/hotel/all`);

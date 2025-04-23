@@ -1,8 +1,8 @@
 <script setup>
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiUrl;
-const { data, error } = await useFetch(`${apiUrl}/main/all`
-);
+import { useApi } from '@/composables/useApi'
+const { data, error } = await useApi('/main/all')
 
 // console.log("Données reçues :", data.value);
 </script>

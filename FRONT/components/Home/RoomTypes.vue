@@ -17,24 +17,15 @@ interface RoomType {
 const roomTypes = ref<RoomType[]>([]);
 const selectedRoom = ref<RoomType | null>(null);
 
-// Fonction pour récupérer tous les types de chambres depuis l'API
-const { data, error } = await useAsyncData<RoomType[]>("roomTypes", () =>
-    $fetch(`${apiUrl}/type/all`)
-);
+const { data, error, isLoading } = await useApi<RoomType[]>('/type/all')
 
-// Gestion des erreurs de récupération des données
 if (error.value) {
-  console.error("Erreur lors de la récupération des types de chambres :", error.value);
+  console.error("Erreur lors de la récupération des types de chambres :", error.value)
 }
 
-// Si des données sont récupérées avec succès
 if (data.value) {
-  roomTypes.value = data.value;
-
-  // Sélection automatique de la première chambre disponible
-  if (roomTypes.value.length > 0) {
-    selectedRoom.value = roomTypes.value[0];
-  }
+  roomTypes.value = data.value
+  selectedRoom.value = roomTypes.value[0] ?? null
 }
 
 // Fonction pour sélectionner une chambre au clic

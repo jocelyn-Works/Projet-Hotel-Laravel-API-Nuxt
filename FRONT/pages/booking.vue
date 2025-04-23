@@ -35,7 +35,7 @@ async function verifierDisponibilite() {
   console.log("Accès à /booking avec ces dates :", datesStore.selectedDates);
 
   try {
-    const response = await $fetch<{ typesDisponibles: Room[] }>(`${apiUrl}/check-availability`, {
+    const { data, error } = await useApi<{ typesDisponibles: Room[] }>('/check-availability', {
       method: 'POST',
       body: {
         dateDebut: datesStore.selectedDates.start,
@@ -43,8 +43,8 @@ async function verifierDisponibilite() {
       }
     });
 
-    if (response.typesDisponibles.length > 0) {
-      chambresDispo.value = response.typesDisponibles;
+    if (data.value?.typesDisponibles?.length > 0) {
+      chambresDispo.value = data.value.typesDisponibles;
     } else {
       router.push({ path: '/', query: { error: 'Aucune chambre disponible' } });
     }
