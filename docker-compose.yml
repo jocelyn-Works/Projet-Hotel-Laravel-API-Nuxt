@@ -1,5 +1,6 @@
 
 services:
+  API:
   front:
     build:
       context: ./front
