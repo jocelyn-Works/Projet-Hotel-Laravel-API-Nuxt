@@ -35,7 +35,7 @@ services:
 
   front:
     build:
-      context: ./front
+      context: ./FRONT
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
