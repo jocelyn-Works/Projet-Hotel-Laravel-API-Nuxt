@@ -12,12 +12,8 @@ const datesStore = useDatesStore();
 const cartStore = useCartStore();
 const router = useRouter();
 
-
 const chambresDispo = ref<Room[]>([]);
 const loading = ref(true);
-
-const config = useRuntimeConfig();
-const apiUrl = config.public.apiUrl;
 
 interface Room {
   id: number;
@@ -27,8 +23,6 @@ interface Room {
   disponibles: number;
   image_paths?: string[];
 }
-
-
 
 async function verifierDisponibilite() {
   if (!datesStore.selectedDates.start || !datesStore.selectedDates.end) {
@@ -40,7 +34,7 @@ async function verifierDisponibilite() {
   console.log("✅ Accès à /booking avec ces dates :", datesStore.selectedDates);
 
   try {
-    const response = await $fetch<{ typesDisponibles: Room[] }>(`${apiUrl}/check-availability`, {
+    const response = await $fetch<{ typesDisponibles: Room[] }>('http://localhost:8000/api/check-availability', {
       method: 'POST',
       body: {
         dateDebut: datesStore.selectedDates.start,
@@ -89,21 +83,33 @@ watch(
   </transition>
 
   <Logo />
+
   <UContainer class="py-8 space-y-8">
     <div class="text-center mb-8 dark:text-black">
       <ButtonDateBooking />
     </div>
 
-    <!-- Gestion du chargement -->
+    <!-- Chargement -->
     <div v-if="loading" class="text-center">
       <p>Chargement des chambres...</p>
     </div>
 
-    <!-- Affichage dynamique des chambres disponibles -->
+    <!-- Affichage des chambres disponibles -->
     <div v-else-if="chambresDispo.length">
-      <div v-for="room in chambresDispo" :key="room.id" class="bg-[#fdf8f1] p-6 rounded-lg shadow-lg flex flex-col lg:flex-row items-center">
-        <div class="lg:w-1/2">
-          <img :src="room.image" :alt="room.type" class="rounded-lg" />
+      <div
+          v-for="room in chambresDispo"
+          :key="room.id"
+          class="bg-[#fdf8f1] p-6 rounded-lg shadow-lg flex flex-col lg:flex-row items-center"
+      >
+        <!-- Images (grille 2x2 comme dans RoomTypes.vue) -->
+        <div class="lg:w-1/2 grid grid-cols-2 gap-4">
+          <img
+              v-for="(img, index) in room.image_paths?.slice(0, 4)"
+              :key="index"
+              :src="img"
+              class="w-full h-48 object-cover rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
+              :alt="`Image ${index + 1} de ${room.name}`"
+          />
         </div>
 
         <!-- Infos -->
@@ -118,7 +124,7 @@ watch(
       </div>
     </div>
 
-    <!-- Message si aucune chambre n'est trouvée -->
+    <!-- Message si aucune chambre -->
     <div v-else class="text-center text-red-500 font-bold">
       <p>Aucune chambre disponible pour ces dates.</p>
     </div>

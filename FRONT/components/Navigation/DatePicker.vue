@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useUiStore } from '~/stores/ui';
@@ -20,13 +21,13 @@ const selected = ref({
   end: new Date()
 });
 
-const errorMessage = ref(''); // Message d'erreur si aucune chambre n'est disponible
+const errorMessage = ref('');
 
 const attrs = {
   transparent: true,
   borderless: true,
   color: 'primary',
-  isDark: { selector: 'html', darkClass: 'dark' },
+  isDark: true,
   firstDayOfWeek: 2
 };
 
@@ -73,9 +74,8 @@ const calendarAttributes = computed(() => [
 ]);
 
 async function verifierDisponibilite() {
-  errorMessage.value = ''; // Réinitialisation du message d'erreur
+  errorMessage.value = '';
 
-  // Vérifie que l'utilisateur a bien sélectionné des dates
   if (!selected.value.start || !selected.value.end) {
     console.error("Aucune date sélectionnée !");
     return;
