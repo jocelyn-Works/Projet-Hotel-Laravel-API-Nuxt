@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useUiStore } from '~/stores/ui';
 import { useDatesStore } from '~/stores/dates';
@@ -11,6 +11,7 @@ const { activeComponent } = storeToRefs(uiStore);
 const datesStore = useDatesStore();
 const cartStore = useCartStore();
 const router = useRouter();
+
 
 const chambresDispo = ref<Room[]>([]);
 const loading = ref(true);
@@ -26,6 +27,8 @@ interface Room {
   disponibles: number;
   image_paths?: string[];
 }
+
+
 
 async function verifierDisponibilite() {
   if (!datesStore.selectedDates.start || !datesStore.selectedDates.end) {

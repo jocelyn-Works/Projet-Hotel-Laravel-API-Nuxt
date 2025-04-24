@@ -1,6 +1,38 @@
 
 services:
-  API:
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  api:
+    build:
+      context: ./API
+      dockerfile: Dockerfile
+    container_name: laravel-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./API:/app
+    depends_on:
+      - db
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: secret
+
   front:
     build:
       context: ./front
@@ -9,3 +41,8 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+    depends_on:
+      - api
+
+volumes:
+  mysql-data:
