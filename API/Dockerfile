@@ -1,32 +1,64 @@
-
 FROM php:8.2-fpm
 
-# Install system dependencies
+# Install dependencies
 RUN apt-get update && apt-get install -y \
+    nginx \
+    supervisor \
     build-essential \
     libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    libzip-dev \
     libonig-dev \
-    libxml2-dev \
     zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
     unzip \
     git \
     curl \
-    libzip-dev \
-    libpq-dev \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
+    iputils-ping \
+    libcurl4-openssl-dev \
+    pkg-config \
+    libicu-dev
 
-# Install Composer
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install extensions
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
+
+# Create necessary directories and set permissions
+RUN mkdir -p /var/lib/nginx /var/run && chown -R www-data:www-data /var/lib/nginx /var/run
+
+
+# Copy nginx config
+COPY nginx/conf.d/nginx-root.conf /etc/nginx/nginx.conf
+COPY nginx/conf.d/nginx.conf /etc/nginx/sites-enabled/default
+COPY supervisor.conf /etc/supervisor/conf.d/supervisor.conf
+COPY zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+
+# Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Set working directory
 WORKDIR /var/www
 
-COPY . .
+# Copy existing application directory contents
+COPY . /var/www
 
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
-
-# Fix permissions
+# Adjust permissions & switch to www-data user
 RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
+USER www-data
 
-EXPOSE 9000
+# Install project dependencies
+RUN composer install --ignore-platform-reqs
 
-CMD ["php-fpm"]
+# Expose port 9000 and start php-fpm server
+EXPOSE 8000
+
+
+
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisor.conf"]
